@@ -8,7 +8,7 @@ object Versions {
     const val rxAndroid = "2.1.0"
     const val supportLibrary = "28.0.0"
     const val kluent = "1.42"
-    const val mockito = "2.23.4"
+    const val mockito = "2.0.0"
     const val navigationVersion = "1.0.0-alpha07"
     const val constraintLayout = "1.1.2"
     const val koin = "1.0.1"
@@ -19,4 +19,5 @@ object Versions {
     const val retrofit = "2.5.0"
     const val logging = "3.12.0"
     const val mockwebserver = "2.12.0"
+    const val androidPlugin = "3.2.1"
 }

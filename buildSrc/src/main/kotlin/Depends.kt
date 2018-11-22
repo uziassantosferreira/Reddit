@@ -17,7 +17,12 @@ object Depends {
         const val reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
     }
 
-    object Koin {
+    object BuildPlugins {
+        const val android = "com.android.tools.build:gradle:${Versions.androidPlugin}"
+        const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    }
+
+        object Koin {
         const val android = "org.koin:koin-android:${Versions.koin}"
         const val scope = "org.koin:koin-android-scope:${Versions.koin}"
         const val viewmodel = "org.koin:koin-android-viewmodel:${Versions.koin}"
