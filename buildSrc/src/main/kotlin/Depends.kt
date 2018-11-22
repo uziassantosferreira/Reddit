@@ -5,10 +5,11 @@ object Depends {
     }
 
     object Support {
-        const val appcompat = "com.android.support:appcompat-v7:${Versions.supportLibrary}"
-        const val design = "com.android.support:design:${Versions.supportLibrary}"
-        const val constraintLayout = "com.android.support.constraint:constraint-layout:${Versions.constraintLayout}"
-        const val recyclerview = "com.android.support:recyclerview-v7:${Versions.supportLibrary}"
+        const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
+        const val material = "com.google.android.material:material:${Versions.material}"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+        const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
+        const val cardview = "androidx.cardview:cardview:${Versions.cardview}"
     }
 
     object Lifecycle {

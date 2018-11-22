@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:background="@android:color/darker_gray"
+             android:padding="20dp"
+             android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:elevation="4dp"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            card_view:cardBackgroundColor="@android:color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:text="No meu xinélo da humildade eu gostaria muito de ver o Neymar e o Ganso. Por que eu acho que.... 11 entre 10 brasileiros gostariam. Você veja, eu já vi, parei de ver. Voltei a ver, e acho que o Neymar e o Ganso têm essa capacidade de fazer a gente olhar."
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewTitle"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintEnd_toStartOf="@+id/imageViewPost"/>
+
+            <ImageView
+                    android:id="@+id/imageViewPost"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:elevation="8dp"
+                    android:scaleType="fitXY"
+                    tools:srcCompat="@tools:sample/avatars[5]"
+                    android:visibility="visible"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    card_view:layout_constraintVertical_bias="0.0"/>
+
+            <TextView
+                    android:text="submitted 2hrs ago by Merry D"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewPostedBy"
+                    android:layout_marginTop="8dp"
+                    card_view:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageButton
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_share"
+                    android:id="@+id/imageButtonShare"
+                    android:background="@android:color/transparent"
+                    card_view:layout_constraintTop_toTopOf="@+id/imageButtonLike"
+                    card_view:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageButton
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_comments"
+                    android:id="@+id/imageViewComments"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="16dp"
+                    card_view:layout_constraintStart_toEndOf="@+id/imageButtonShare"
+                    card_view:layout_constraintTop_toTopOf="@+id/imageButtonShare"/>
+
+            <ImageButton
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_thumbs_down"
+                    android:id="@+id/imageButtonDislike"
+                    android:background="@android:color/transparent"
+                    card_view:layout_constraintEnd_toEndOf="@+id/textViewPostedBy"
+                    card_view:layout_constraintTop_toBottomOf="@+id/textViewPostedBy"/>
+
+            <TextView
+                    android:text="300"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewQuantityLike"
+                    android:layout_marginEnd="8dp"
+                    android:textStyle="bold"
+                    card_view:layout_constraintEnd_toStartOf="@+id/imageButtonDislike"
+                    card_view:layout_constraintTop_toTopOf="@+id/imageButtonDislike"
+                    card_view:layout_constraintBottom_toBottomOf="@+id/imageButtonDislike"/>
+
+            <ImageButton
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_thumbs_up"
+                    android:id="@+id/imageButtonLike"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:color/transparent"
+                    card_view:layout_constraintEnd_toStartOf="@+id/textViewQuantityLike"
+                    card_view:layout_constraintTop_toTopOf="@+id/imageButtonDislike"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>

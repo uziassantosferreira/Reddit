@@ -36,9 +36,10 @@ android {
 dependencies {
     implementation(Depends.Kotlin.stdlib)
     implementation(Depends.Support.appcompat)
-    implementation(Depends.Support.design)
+    implementation(Depends.Support.material)
     implementation(Depends.Support.constraintLayout)
     implementation(Depends.Support.recyclerview)
+    implementation(Depends.Support.cardview)
 
     testImplementation(Depends.Test.kluent)
     testImplementation(Depends.Test.mockito)
