@@ -1,0 +1,3 @@
+package com.uziassantosferreira.domain.requestvalue
+
+interface RequestValues
