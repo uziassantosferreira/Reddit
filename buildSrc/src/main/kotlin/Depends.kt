@@ -14,7 +14,7 @@ object Depends {
 
     object Lifecycle {
         const val extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
-        const val compiler = "androidx.lifecycle:lifecycle-compiler-ktx:${Versions.lifecycle}"
+        const val compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
         const val reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
     }
 

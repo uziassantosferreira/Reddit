@@ -1,9 +1,5 @@
-
-import org.jetbrains.kotlin.cli.jvm.main
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-android-extensions")
@@ -12,18 +8,11 @@ plugins {
 android {
     compileSdkVersion(Versions.compileSdk)
     defaultConfig {
-        applicationId = "com.uziassantosferreira.reddit"
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdk)
         versionCode = Versions.versionCode
         versionName = "1.0"
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
     }
 
     sourceSets {
@@ -35,17 +24,13 @@ android {
 
 dependencies {
     implementation(Depends.Kotlin.stdlib)
+    implementation(Depends.Rx.kotlin)
+    implementation(Depends.Rx.android)
+    implementation(Depends.Lifecycle.extensions)
+    kapt(Depends.Lifecycle.compiler)
 
-    implementation(Depends.Support.appcompat)
-    implementation(Depends.Support.material)
-    implementation(Depends.Support.constraintLayout)
-    implementation(Depends.Support.recyclerview)
-    implementation(Depends.Support.cardview)
-
-    implementation(Depends.Navigation.fragment)
-    implementation(Depends.Navigation.ui)
-
-    implementation(project(":presentation"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
 
     testImplementation(Depends.Test.kluent)
     testImplementation(Depends.Test.mockito)

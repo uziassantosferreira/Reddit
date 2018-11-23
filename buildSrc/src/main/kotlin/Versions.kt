@@ -21,6 +21,6 @@ object Versions {
     const val junit = "4.12"
     const val retrofit = "2.5.0"
     const val logging = "3.12.0"
-    const val mockwebserver = "2.12.0"
+    const val mockwebserver = "2.7.5"
     const val androidPlugin = "3.2.1"
 }
