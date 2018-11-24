@@ -40,5 +40,6 @@ dependencies {
     testImplementation(Depends.Test.junit)
     testImplementation(Depends.Test.mockwebserver)
     testImplementation(Depends.Test.koin)
+    testImplementation("org.koin:koin-test:1.0.1")
 
 }

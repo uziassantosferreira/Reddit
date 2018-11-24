@@ -3,6 +3,7 @@ package com.uziassantosferreira.data.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.uziassantosferreira.data.api.RedditService
+import com.uziassantosferreira.data.di.Network.API_URL_NAME
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object Network {
 
+    const val API_URL_NAME = "API_URL"
     const val API_URL : String = "https://www.reddit.com/"
 }
 
@@ -30,6 +32,7 @@ val networkModule = module {
         .build()
     }
 
+    single(name = API_URL_NAME) { "https://www.reddit.com/" }
 
     single<Interceptor> {
         val logger = HttpLoggingInterceptor()
@@ -42,7 +45,7 @@ val networkModule = module {
             .client(get())
             .addCallAdapterFactory(get<RxJava2CallAdapterFactory>())
             .addConverterFactory(get<GsonConverterFactory>())
-            .baseUrl(Network.API_URL)
+            .baseUrl(get<String>(API_URL_NAME))
             .build()
     }
 
