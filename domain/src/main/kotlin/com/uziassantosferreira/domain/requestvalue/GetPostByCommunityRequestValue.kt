@@ -1,3 +1,4 @@
 package com.uziassantosferreira.domain.requestvalue
 
-data class GetPostByCommunityRequestValue(val community: String): RequestValues
+data class GetPostByCommunityRequestValue(val community: String = "",
+                                          val page: String = ""): RequestValues
