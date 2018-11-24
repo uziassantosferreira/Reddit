@@ -7,7 +7,7 @@ import com.uziassantosferreira.domain.repository.Repository
 import io.reactivex.Flowable
 
 class RepositoryImpl(private val dataSource: DataSource): Repository {
-
+    
     override fun getPostsByCommunity(community: String, page: String): Flowable<Pair<Pagination, List<Post>>> =
         dataSource.getPostsByCommunity(community, page)
 }
