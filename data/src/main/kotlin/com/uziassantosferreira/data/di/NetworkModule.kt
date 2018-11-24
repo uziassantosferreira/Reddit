@@ -3,6 +3,7 @@ package com.uziassantosferreira.data.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.uziassantosferreira.data.api.RedditService
+import com.uziassantosferreira.data.di.Network.API_URL
 import com.uziassantosferreira.data.di.Network.API_URL_NAME
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -32,7 +33,7 @@ val networkModule = module {
         .build()
     }
 
-    single(name = API_URL_NAME) { "https://www.reddit.com/" }
+    single(name = API_URL_NAME) { API_URL }
 
     single<Interceptor> {
         val logger = HttpLoggingInterceptor()
