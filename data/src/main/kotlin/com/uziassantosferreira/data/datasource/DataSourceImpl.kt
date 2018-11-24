@@ -6,7 +6,8 @@ import io.reactivex.Flowable
 
 class DataSourceImpl(private val service: RedditService): DataSource {
 
-    override fun getPostsByCommunity(community: String): Flowable<List<Post>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getPostsByCommunity(community: String): Flowable<List<Post>> =
+        service.getPostsByCommunity(community).map {
+            emptyList<Post>()
+        }
 }

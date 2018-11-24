@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(Depends.Kotlin.stdlib)
-    implementation(Depends.Rx.kotlin)
+    api(Depends.Kotlin.stdlib)
+    api(Depends.Rx.kotlin)
 
     testImplementation(Depends.Test.kluent)
     testImplementation(Depends.Test.mockito)

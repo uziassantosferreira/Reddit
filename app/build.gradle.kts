@@ -45,7 +45,11 @@ dependencies {
     implementation(Depends.Navigation.fragment)
     implementation(Depends.Navigation.ui)
 
-    implementation(project(":presentation"))
+    api(project(":presentation"))
+
+    implementation(Depends.Koin.android)
+    implementation(Depends.Koin.scope)
+    implementation(Depends.Koin.viewmodel)
 
     testImplementation(Depends.Test.kluent)
     testImplementation(Depends.Test.mockito)

@@ -23,14 +23,13 @@ android {
 }
 
 dependencies {
-    implementation(Depends.Kotlin.stdlib)
-    implementation(Depends.Rx.kotlin)
-    implementation(Depends.Rx.android)
-    implementation(Depends.Lifecycle.extensions)
+    api(Depends.Rx.android)
+    api(Depends.Lifecycle.extensions)
+
     kapt(Depends.Lifecycle.compiler)
 
-    implementation(project(":domain"))
-    implementation(project(":data"))
+    api(project(":domain"))
+    api(project(":data"))
 
     testImplementation(Depends.Test.kluent)
     testImplementation(Depends.Test.mockito)

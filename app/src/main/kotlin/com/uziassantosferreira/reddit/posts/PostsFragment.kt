@@ -23,6 +23,8 @@ class PostsFragment: BaseFragment() {
         recyclerView.adapter = postsAdapter
 
         postsAdapter.list.addAll(listOf(Post(), Post(), Post()))
+
+
     }
 
     private fun onClickItem(): (Post) -> Unit = {}
