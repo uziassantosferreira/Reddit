@@ -9,19 +9,16 @@ import com.uziassantosferreira.presentation.data.datasource.PostsDataSource
 import com.uziassantosferreira.presentation.data.datasource.PostsDataSourceFactory
 import com.uziassantosferreira.presentation.model.Post
 
-class PostsViewModel(private val postsDataSourceFactory: PostsDataSourceFactory) : BaseViewModel() {
+class PostsViewModel(private val postsDataSourceFactory: PostsDataSourceFactory,
+                     pagedListConfig: PagedList.Config) : BaseViewModel() {
 
     var postsLiveData: LiveData<PagedList<Post>>
         private set
 
+
     init {
-        val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .setPageSize(1)
-            .setInitialLoadSizeHint(1)
-            .build()
         postsDataSourceFactory.compositeDisposable = compositeDisposable
-        postsLiveData = LivePagedListBuilder<String, Post>(postsDataSourceFactory, config).build()
+        postsLiveData = LivePagedListBuilder<String, Post>(postsDataSourceFactory, pagedListConfig).build()
     }
 
     fun retry() {

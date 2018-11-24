@@ -37,8 +37,6 @@ class PostsDataSource(
         }
     }
 
-
-
     override fun loadInitial(params: LoadInitialParams<String>,
                              callback: LoadInitialCallback<String, Post>) {
         // update network states.

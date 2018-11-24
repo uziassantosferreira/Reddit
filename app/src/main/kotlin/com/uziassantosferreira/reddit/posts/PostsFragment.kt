@@ -15,10 +15,12 @@ import com.uziassantosferreira.reddit.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_posts.*
 import kotlinx.android.synthetic.main.list_item_network_state.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PostsFragment: BaseFragment() {
 
-    private val postsViewModel: PostsViewModel by inject()
+    private val postsViewModel: PostsViewModel by viewModel{ parametersOf(getPagedListConfig()) }
 
     private lateinit var postsAdapter: PostsAdapter
 
@@ -86,4 +88,11 @@ class PostsFragment: BaseFragment() {
         swipeRefreshLayout.isEnabled = networkState?.status == Status.SUCCESS
         retryLoadingButton.setOnClickListener { postsViewModel.retry() }
     }
+
+    private fun getPagedListConfig() =
+        PagedList.Config.Builder()
+            .setPageSize(1)
+            .setInitialLoadSizeHint(1)
+            .setEnablePlaceholders(false)
+            .build()
 }

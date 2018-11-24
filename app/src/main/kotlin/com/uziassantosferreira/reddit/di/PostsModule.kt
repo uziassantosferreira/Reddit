@@ -1,5 +1,6 @@
 package com.uziassantosferreira.reddit.di
 
+import androidx.paging.PagedList
 import com.uziassantosferreira.domain.usecase.GetPostByCommunity
 import com.uziassantosferreira.presentation.data.datasource.PostsDataSourceFactory
 import com.uziassantosferreira.presentation.viewmodel.PostsViewModel
@@ -12,5 +13,5 @@ val postsModule = module {
 
     single { PostsDataSourceFactory(get()) }
 
-    viewModel { PostsViewModel(get()) }
+    viewModel { (config : PagedList.Config) -> PostsViewModel(get(), config) }
 }

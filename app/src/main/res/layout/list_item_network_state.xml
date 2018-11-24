@@ -9,6 +9,7 @@
             android:id="@+id/errorMessageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="center_horizontal" />
 
     <ProgressBar
@@ -16,6 +17,7 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="center" />
 
     <Button
@@ -24,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:text="retry" />
 
 </LinearLayout>
