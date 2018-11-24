@@ -25,6 +25,7 @@ android {
 dependencies {
     api(Depends.Rx.android)
     api(Depends.Lifecycle.extensions)
+    api(Depends.Paging.paging)
 
     kapt(Depends.Lifecycle.compiler)
 

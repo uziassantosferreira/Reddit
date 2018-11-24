@@ -18,6 +18,10 @@ object Depends {
         const val reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
     }
 
+    object Paging {
+        const val paging = "androidx.paging:paging-runtime-ktx:${Versions.paging}"
+    }
+
     object BuildPlugins {
         const val android = "com.android.tools.build:gradle:${Versions.androidPlugin}"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
