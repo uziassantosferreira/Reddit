@@ -15,6 +15,7 @@ object JsonPostMapper: Mapper<JsonPost, Post>() {
         val imagePreview = mutableListOf<Image>()
         source.preview?.images?.forEach { content ->
             content.image?.let { image ->
+                if (image.url.isNullOrEmpty()) return@let
                 imagePreview.add(JsonImageMapper.transformTo(image))
             }
             content.resolutions?.let {images ->
@@ -22,7 +23,7 @@ object JsonPostMapper: Mapper<JsonPost, Post>() {
             }
         }
         val date = if (source.createdUtc == null) Date() else Date(source.createdUtc * 1000 )
-        return Post(title = source.title ?: "", text = source.text ?: "",
-            imagePreview = imagePreview, author = Author(name = source.authorName ?: ""), date = date)
+        return Post(title = source.title ?: "", imagePreview = imagePreview,
+            author = Author(name = source.authorName ?: ""), date = date)
     }
 }
