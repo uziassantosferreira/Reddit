@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.uziassantosferreira.domain.model.Pagination
 import com.uziassantosferreira.domain.requestvalue.GetPostByCommunityRequestValue
-import com.uziassantosferreira.domain.usecase.GetPostByCommunity
+import com.uziassantosferreira.domain.usecase.UseCase
 import com.uziassantosferreira.presentation.data.NetworkState
 import com.uziassantosferreira.presentation.exception.ErrorHandler
 import com.uziassantosferreira.presentation.exception.PresentationThrowable
@@ -14,7 +14,7 @@ import com.uziassantosferreira.presentation.util.UseCaseHandler
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 class PostsDataSource(
-    private val getPostByCommunity: GetPostByCommunity,
+    private val getPostByCommunity: UseCase<GetPostByCommunityRequestValue, Pair<Pagination, List<com.uziassantosferreira.domain.model.Post>>>,
     private val compositeDisposable: CompositeDisposable
 ) : PageKeyedDataSource<String, Post>() {
 
