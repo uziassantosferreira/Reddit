@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.uziassantosferreira.presentation.data.NetworkState
 import com.uziassantosferreira.presentation.data.Status
 import com.uziassantosferreira.reddit.R
+import com.uziassantosferreira.reddit.extension.getMessage
 import kotlinx.android.synthetic.main.list_item_network_state.view.*
 
 class NetworkStateViewHolder(val view: View, private val retryCallback: () -> Unit) : RecyclerView.ViewHolder(view) {
@@ -17,9 +18,9 @@ class NetworkStateViewHolder(val view: View, private val retryCallback: () -> Un
 
     fun bindTo(networkState: NetworkState?) {
         //error message
-        itemView.errorMessageTextView.visibility = if (networkState?.message != null) View.VISIBLE else View.GONE
-        if (networkState?.message != null) {
-            itemView.errorMessageTextView.text = networkState.message
+        itemView.errorMessageTextView.visibility = if (networkState?.failure != null) View.VISIBLE else View.GONE
+        networkState?.failure?.let {
+            itemView.errorMessageTextView.text = it.getMessage(itemView.context)
         }
 
         //loading and retry

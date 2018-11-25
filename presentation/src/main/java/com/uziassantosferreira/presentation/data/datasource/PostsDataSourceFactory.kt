@@ -10,6 +10,7 @@ class PostsDataSourceFactory(private val getPostByCommunity: GetPostByCommunity)
     : DataSource.Factory<String, Post>() {
 
     val postsDataSourceLiveData = MutableLiveData<PostsDataSource>()
+
     lateinit var compositeDisposable: CompositeDisposable
 
     override fun create(): DataSource<String, Post> {

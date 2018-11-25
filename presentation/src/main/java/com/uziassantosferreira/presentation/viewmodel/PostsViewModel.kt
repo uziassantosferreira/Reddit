@@ -15,26 +15,21 @@ class PostsViewModel(private val postsDataSourceFactory: PostsDataSourceFactory,
     var postsLiveData: LiveData<PagedList<Post>>
         private set
 
-
     init {
         postsDataSourceFactory.compositeDisposable = compositeDisposable
         postsLiveData = LivePagedListBuilder<String, Post>(postsDataSourceFactory, pagedListConfig).build()
     }
 
     fun retry() {
-        postsDataSourceFactory.postsDataSourceLiveData.value!!.retry()
+        postsDataSourceFactory.postsDataSourceLiveData.value?.retry()
     }
 
     fun refresh() {
-        postsDataSourceFactory.postsDataSourceLiveData.value!!.invalidate()
+        postsDataSourceFactory.postsDataSourceLiveData.value?.invalidate()
     }
 
     fun getNetworkState(): LiveData<NetworkState> = Transformations.switchMap<PostsDataSource, NetworkState>(
         postsDataSourceFactory.postsDataSourceLiveData
     ) { it.networkState }
-
-    fun getRefreshState(): LiveData<NetworkState> = Transformations.switchMap<PostsDataSource, NetworkState>(
-        postsDataSourceFactory.postsDataSourceLiveData
-    ) { it.initialLoad }
 
 }

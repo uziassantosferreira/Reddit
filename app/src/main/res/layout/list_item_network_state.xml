@@ -2,30 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:padding="@dimen/screen_edge_margin"
+              android:gravity="center"
               android:orientation="vertical" >
 
     <TextView
+            style="?android:attr/textAppearanceLarge"
             android:id="@+id/errorMessageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/label_try_again"
+            android:layout_marginBottom="@dimen/text_fields_floating_label_padding_below_text_divider"
             android:visibility="gone"
-            android:layout_gravity="center_horizontal" />
+            android:gravity="center"/>
 
     <ProgressBar
             android:id="@+id/loadingProgressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:visibility="gone"
-            android:layout_gravity="center" />
+            android:layout_height="wrap_content"/>
 
     <Button
             android:id="@+id/retryLoadingButton"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:visibility="gone"
-            android:text="retry" />
+            android:layout_height="wrap_content"
+            android:text="@string/label_try_again" />
 
 </LinearLayout>

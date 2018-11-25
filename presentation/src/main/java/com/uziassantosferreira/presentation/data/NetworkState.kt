@@ -1,5 +1,7 @@
 package com.uziassantosferreira.presentation.data
 
+import com.uziassantosferreira.presentation.exception.Failure
+
 enum class Status {
     RUNNING,
     SUCCESS,
@@ -9,12 +11,12 @@ enum class Status {
 @Suppress("DataClassPrivateConstructor")
 data class NetworkState private constructor(
     val status: Status,
-    val message: String? = null) {
+    val failure: Failure? = null) {
 
     companion object {
         val LOADED = NetworkState(Status.SUCCESS)
         val LOADING = NetworkState(Status.RUNNING)
-        fun error(msg: String?) = NetworkState(Status.FAILED, msg)
+        fun error(failure: Failure) = NetworkState(Status.FAILED, failure)
     }
 
 }
