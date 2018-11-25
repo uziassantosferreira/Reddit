@@ -51,6 +51,9 @@ dependencies {
     implementation(Depends.Koin.scope)
     implementation(Depends.Koin.viewmodel)
 
+    implementation(Depends.Glide.glide)
+    kapt(Depends.Glide.glidecompiler)
+
     testImplementation(Depends.Test.kluent)
     testImplementation(Depends.Test.mockito)
     testImplementation(Depends.Test.archCore)

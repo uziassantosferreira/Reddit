@@ -24,4 +24,5 @@ object Versions {
     const val logging = "3.12.0"
     const val mockwebserver = "2.7.5"
     const val androidPlugin = "3.2.1"
+    const val glide = "4.8.0"
 }

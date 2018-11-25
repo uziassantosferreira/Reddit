@@ -1,3 +1,3 @@
 package com.uziassantosferreira.presentation.model
 
-class Image(url: String = "", width: Int = 0, height: Int = 0)
+class Image(val url: String = "", val width: Int = 0, val height: Int = 0)

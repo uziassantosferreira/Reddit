@@ -7,6 +7,7 @@ object PresentationPostMapper: Mapper<Post, domain>() {
 
     override fun transformFrom(source: domain): Post = Post(title = source.title,
         totalComments = source.totalComments, totalLikes = source.totalLikes, date = source.date,
+        text = source.text,
         author = PresentationAuthorMapper.transformFrom(source.author),
         imagePreview = PresentationImageMapper.transformFromList(source.imagePreview))
 

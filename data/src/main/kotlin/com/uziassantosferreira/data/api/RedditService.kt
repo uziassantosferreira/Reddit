@@ -12,6 +12,7 @@ interface RedditService {
 
     @GET("{community}/new/.json")
     fun getPostsByCommunity(@Path("community") input: String = "",
-                            @Query("after") nextPage: String = ""): Flowable<JsonGenericResponseWrapper<JsonGenericList<JsonPost>>>
+                            @Query("after") nextPage: String = "",
+                            @Query("raw_json") rawJson: Int = 1): Flowable<JsonGenericResponseWrapper<JsonGenericList<JsonPost>>>
 
 }

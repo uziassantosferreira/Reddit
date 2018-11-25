@@ -1,111 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:background="@android:color/darker_gray"
-             android:padding="20dp"
-             android:layout_height="wrap_content">
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:elevation="@dimen/card_elevation"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        android:layout_margin="@dimen/card_space_between_cards" android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_gravity="center_vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="30dp"
-            android:elevation="4dp"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            card_view:cardBackgroundColor="@android:color/white">
+            android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <ImageView
+                android:id="@+id/imageViewThumb"
+                android:background="@color/grey_300"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="0dp"
+                tools:srcCompat="@tools:sample/avatars"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                    android:text="Teste"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewTitle"
-                    card_view:layout_constraintTop_toTopOf="parent"
-                    card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintEnd_toStartOf="@+id/imageViewPost"/>
+        <TextView
+                android:id="@+id/textViewTitle"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Uzias"
+                android:paddingLeft="@dimen/card_left_and_right_padding"
+                android:paddingRight="@dimen/card_left_and_right_padding"
+                android:paddingTop="@dimen/card_top_and_bottom_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewThumb"/>
 
-            <ImageView
-                    android:id="@+id/imageViewPost"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    app:srcCompat="@mipmap/ic_launcher"
-                    android:elevation="8dp"
-                    android:scaleType="fitXY"
-                    tools:srcCompat="@tools:sample/avatars[5]"
-                    android:visibility="visible"
-                    card_view:layout_constraintBottom_toBottomOf="parent"
-                    card_view:layout_constraintEnd_toEndOf="parent"
-                    card_view:layout_constraintTop_toTopOf="parent"
-                    card_view:layout_constraintVertical_bias="0.0"/>
+        <TextView
+                android:id="@+id/textViewSubtitle"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Uzias"
+                android:paddingLeft="@dimen/card_left_and_right_padding"
+                android:paddingRight="@dimen/card_left_and_right_padding"
+                android:paddingTop="@dimen/card_primary_title_bottom_padding"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-            <TextView
-                    android:text="submitted 2hrs ago by Merry D"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewPostedBy"
-                    android:layout_marginTop="8dp"
-                    card_view:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-                    card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintEnd_toEndOf="parent" />
-
-            <ImageButton
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_share"
-                    android:id="@+id/imageButtonShare"
-                    android:background="@android:color/transparent"
-                    card_view:layout_constraintTop_toTopOf="@+id/imageButtonLike"
-                    card_view:layout_constraintStart_toStartOf="parent"/>
-
-            <ImageButton
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_comments"
-                    android:id="@+id/imageViewComments"
-                    android:background="@android:color/transparent"
-                    android:layout_marginStart="16dp"
-                    card_view:layout_constraintStart_toEndOf="@+id/imageButtonShare"
-                    card_view:layout_constraintTop_toTopOf="@+id/imageButtonShare"/>
-
-            <ImageButton
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_thumbs_down"
-                    android:id="@+id/imageButtonDislike"
-                    android:background="@android:color/transparent"
-                    card_view:layout_constraintEnd_toEndOf="@+id/textViewPostedBy"
-                    card_view:layout_constraintTop_toBottomOf="@+id/textViewPostedBy"/>
-
-            <TextView
-                    android:text="300"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewQuantityLike"
-                    android:layout_marginEnd="8dp"
-                    android:textStyle="bold"
-                    card_view:layout_constraintEnd_toStartOf="@+id/imageButtonDislike"
-                    card_view:layout_constraintTop_toTopOf="@+id/imageButtonDislike"
-                    card_view:layout_constraintBottom_toBottomOf="@+id/imageButtonDislike"/>
-
-            <ImageButton
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_thumbs_up"
-                    android:id="@+id/imageButtonLike"
-                    android:layout_marginEnd="8dp"
-                    android:background="@android:color/transparent"
-                    card_view:layout_constraintEnd_toStartOf="@+id/textViewQuantityLike"
-                    card_view:layout_constraintTop_toTopOf="@+id/imageButtonDislike"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+        <TextView
+                android:id="@+id/textViewAuthor"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Uzias"
+                android:paddingBottom="@dimen/card_top_and_bottom_padding"
+                android:paddingLeft="@dimen/card_left_and_right_padding"
+                android:paddingRight="@dimen/card_left_and_right_padding"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

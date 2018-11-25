@@ -18,6 +18,11 @@ object Depends {
         const val reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
     }
 
+    object Glide {
+        const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+        const val glidecompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+    }
+
     object Paging {
         const val paging = "androidx.paging:paging-runtime-ktx:${Versions.paging}"
     }
@@ -27,7 +32,7 @@ object Depends {
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     }
 
-        object Koin {
+    object Koin {
         const val android = "org.koin:koin-android:${Versions.koin}"
         const val scope = "org.koin:koin-android-scope:${Versions.koin}"
         const val viewmodel = "org.koin:koin-android-viewmodel:${Versions.koin}"
