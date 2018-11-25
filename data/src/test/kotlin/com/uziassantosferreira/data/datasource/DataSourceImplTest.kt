@@ -3,6 +3,8 @@ package com.uziassantosferreira.data.datasource
 import com.nhaarman.mockitokotlin2.mock
 import com.uziassantosferreira.data.api.RedditService
 import com.uziassantosferreira.data.model.JsonGenericResponseWrapper
+import com.uziassantosferreira.domain.exception.DomainThrowable
+import com.uziassantosferreira.domain.exception.Failure
 import com.uziassantosferreira.domain.model.Pagination
 import io.reactivex.Flowable
 import org.amshove.kluent.When
@@ -13,6 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.junit.MockitoJUnitRunner
+import java.net.UnknownHostException
 
 @RunWith(MockitoJUnitRunner::class)
 class DataSourceImplTest {
@@ -35,5 +38,15 @@ class DataSourceImplTest {
             .assertValue(Pair(Pagination(), emptyList()))
             .assertComplete()
             .assertNoErrors()
+    }
+
+    @Test
+    fun `should be call service when get posts by community and expected error no internet`() {
+        When calling service.getPostsByCommunity() itReturns Flowable.error(UnknownHostException())
+        dataSource.getPostsByCommunity()
+            .test()
+            .assertError(DomainThrowable(Failure.NoInternet))
+            .assertNoValues()
+            .assertNotComplete()
     }
 }

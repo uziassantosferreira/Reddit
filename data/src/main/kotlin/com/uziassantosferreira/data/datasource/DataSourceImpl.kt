@@ -1,6 +1,7 @@
 package com.uziassantosferreira.data.datasource
 
 import com.uziassantosferreira.data.api.RedditService
+import com.uziassantosferreira.data.errors.NetworkingErrorHandler
 import com.uziassantosferreira.data.mapper.JsonPostMapper
 import com.uziassantosferreira.data.model.JsonPost
 import com.uziassantosferreira.domain.model.Pagination
@@ -20,4 +21,5 @@ class DataSourceImpl(private val service: RedditService): DataSource {
 
                 Pair(Pagination(json.data?.after ?: ""), posts)
             }
+            .compose(NetworkingErrorHandler())
 }
