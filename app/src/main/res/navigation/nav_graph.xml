@@ -5,6 +5,6 @@
 
     <fragment android:id="@+id/postsFragment"
               android:name="com.uziassantosferreira.reddit.posts.PostsFragment"
-              android:label="PostsFragment"
+              android:label="@string/title_posts"
               tools:layout="@layout/fragment_posts"/>
 </navigation>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.uziassantosferreira.presentation.data.NetworkState
@@ -45,6 +46,7 @@ class PostsFragment: BaseFragment() {
     }
 
     private fun initSwipeToRefresh() {
+        swipeRefreshLayout.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorAccent))
         swipeRefreshLayout.setOnRefreshListener {
             postsViewModel.refresh()
         }
