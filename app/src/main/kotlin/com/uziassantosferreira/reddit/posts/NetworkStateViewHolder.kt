@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.uziassantosferreira.presentation.data.NetworkState
-import com.uziassantosferreira.presentation.data.Status
+import com.uziassantosferreira.presentation.data.datasource.NetworkState
+import com.uziassantosferreira.presentation.data.datasource.Status
 import com.uziassantosferreira.reddit.R
 import com.uziassantosferreira.reddit.extension.getMessage
 import kotlinx.android.synthetic.main.list_item_network_state.view.*

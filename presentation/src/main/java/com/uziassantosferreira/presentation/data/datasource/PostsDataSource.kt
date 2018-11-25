@@ -5,7 +5,6 @@ import androidx.paging.PageKeyedDataSource
 import com.uziassantosferreira.domain.model.Pagination
 import com.uziassantosferreira.domain.requestvalue.GetPostByCommunityRequestValue
 import com.uziassantosferreira.domain.usecase.UseCase
-import com.uziassantosferreira.presentation.data.NetworkState
 import com.uziassantosferreira.presentation.exception.ErrorHandler
 import com.uziassantosferreira.presentation.exception.PresentationThrowable
 import com.uziassantosferreira.presentation.mapper.PresentationPostMapper

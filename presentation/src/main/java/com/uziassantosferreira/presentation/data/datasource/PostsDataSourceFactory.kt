@@ -4,18 +4,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.uziassantosferreira.domain.model.Pagination
 import com.uziassantosferreira.domain.requestvalue.GetPostByCommunityRequestValue
-import com.uziassantosferreira.domain.usecase.GetPostByCommunity
 import com.uziassantosferreira.domain.usecase.UseCase
 import com.uziassantosferreira.presentation.model.Post
 import io.reactivex.disposables.CompositeDisposable
+import kotlin.properties.Delegates
 
 class PostsDataSourceFactory(private val getPostByCommunity:
-                             UseCase<GetPostByCommunityRequestValue, Pair<Pagination, List<com.uziassantosferreira.domain.model.Post>>>)
+                             UseCase<GetPostByCommunityRequestValue,
+                                     Pair<Pagination, List<com.uziassantosferreira.domain.model.Post>>>)
     : DataSource.Factory<String, Post>() {
 
-    val postsDataSourceLiveData = MutableLiveData<PostsDataSource>()
+    var compositeDisposable: CompositeDisposable by Delegates.notNull()
 
-    lateinit var compositeDisposable: CompositeDisposable
+    val postsDataSourceLiveData = MutableLiveData<PostsDataSource>()
 
     override fun create(): DataSource<String, Post> {
         val usersDataSource = PostsDataSource(

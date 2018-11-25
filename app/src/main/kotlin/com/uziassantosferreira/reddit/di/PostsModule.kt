@@ -1,13 +1,15 @@
 package com.uziassantosferreira.reddit.di
 
-import androidx.paging.PagedList
 import com.uziassantosferreira.domain.model.Pagination
 import com.uziassantosferreira.domain.model.Post
 import com.uziassantosferreira.domain.requestvalue.GetPostByCommunityRequestValue
 import com.uziassantosferreira.domain.usecase.GetPostByCommunity
 import com.uziassantosferreira.domain.usecase.UseCase
 import com.uziassantosferreira.presentation.data.datasource.PostsDataSourceFactory
+import com.uziassantosferreira.presentation.data.repository.PostsRepository
+import com.uziassantosferreira.presentation.data.repository.PostsRepositoryImpl
 import com.uziassantosferreira.presentation.viewmodel.PostsViewModel
+import com.uziassantosferreira.reddit.posts.PostsFragment
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
@@ -17,5 +19,7 @@ val postsModule = module {
 
     single { PostsDataSourceFactory(get()) }
 
-    viewModel { (config : PagedList.Config) -> PostsViewModel(get(), config) }
+    single<PostsRepository> { PostsRepositoryImpl(get(), getProperty(PostsFragment.PROPERTY_PAGED_LIST)) }
+
+    viewModel { PostsViewModel(get()) }
 }

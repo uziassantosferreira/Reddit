@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.uziassantosferreira.presentation.data.NetworkState
-import com.uziassantosferreira.presentation.data.Status
+import com.uziassantosferreira.presentation.data.datasource.NetworkState
+import com.uziassantosferreira.presentation.data.datasource.Status
 import com.uziassantosferreira.presentation.model.Post
 import com.uziassantosferreira.presentation.viewmodel.PostsViewModel
 import com.uziassantosferreira.reddit.R
@@ -16,18 +16,24 @@ import com.uziassantosferreira.reddit.base.BaseFragment
 import com.uziassantosferreira.reddit.extension.getMessage
 import kotlinx.android.synthetic.main.fragment_posts.*
 import kotlinx.android.synthetic.main.list_item_network_state.*
+import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class PostsFragment: BaseFragment() {
 
-    private val postsViewModel: PostsViewModel by viewModel{ parametersOf(getPagedListConfig()) }
+    companion object {
+        const val PROPERTY_PAGED_LIST = "pagedList"
+    }
+
+    private val postsViewModel: PostsViewModel by viewModel()
 
     private lateinit var postsAdapter: PostsAdapter
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        setProperty(PROPERTY_PAGED_LIST, getPagedListConfig())
         return inflater.inflate(R.layout.fragment_posts, container, false)
     }
 
@@ -53,7 +59,7 @@ class PostsFragment: BaseFragment() {
     }
 
     private fun subscribeLiveData() {
-        postsViewModel.postsLiveData.observe(this,
+        postsViewModel.getPosts().observe(this,
             Observer<PagedList<Post>> { postsAdapter.submitList(it) })
         postsViewModel.getNetworkState().observe(this,
             Observer<NetworkState> {

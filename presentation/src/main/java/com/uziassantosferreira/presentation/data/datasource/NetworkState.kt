@@ -1,4 +1,4 @@
-package com.uziassantosferreira.presentation.data
+package com.uziassantosferreira.presentation.data.datasource
 
 import com.uziassantosferreira.presentation.exception.Failure
 
@@ -14,9 +14,14 @@ data class NetworkState private constructor(
     val failure: Failure? = null) {
 
     companion object {
-        val LOADED = NetworkState(Status.SUCCESS)
-        val LOADING = NetworkState(Status.RUNNING)
-        fun error(failure: Failure) = NetworkState(Status.FAILED, failure)
+        val LOADED =
+            NetworkState(Status.SUCCESS)
+        val LOADING =
+            NetworkState(Status.RUNNING)
+        fun error(failure: Failure) = NetworkState(
+            Status.FAILED,
+            failure
+        )
     }
 
 }

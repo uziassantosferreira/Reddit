@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.uziassantosferreira.presentation.data.NetworkState
+import com.uziassantosferreira.presentation.data.datasource.NetworkState
 import com.uziassantosferreira.presentation.model.Post
 import com.uziassantosferreira.reddit.R
 

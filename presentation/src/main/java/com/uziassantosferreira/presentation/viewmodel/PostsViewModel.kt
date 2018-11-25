@@ -1,35 +1,22 @@
 package com.uziassantosferreira.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.uziassantosferreira.presentation.data.NetworkState
-import com.uziassantosferreira.presentation.data.datasource.PostsDataSource
-import com.uziassantosferreira.presentation.data.datasource.PostsDataSourceFactory
+import com.uziassantosferreira.presentation.data.datasource.NetworkState
+import com.uziassantosferreira.presentation.data.repository.PostsRepository
 import com.uziassantosferreira.presentation.model.Post
 
-class PostsViewModel(private val postsDataSourceFactory: PostsDataSourceFactory,
-                     pagedListConfig: PagedList.Config) : BaseViewModel() {
-
-    var postsLiveData: LiveData<PagedList<Post>>
-        private set
+class PostsViewModel(private val postsRepository: PostsRepository) : BaseViewModel() {
 
     init {
-        postsDataSourceFactory.compositeDisposable = compositeDisposable
-        postsLiveData = LivePagedListBuilder<String, Post>(postsDataSourceFactory, pagedListConfig).build()
+        postsRepository.setCompositeDisposable(compositeDisposable)
     }
 
-    fun retry() {
-        postsDataSourceFactory.postsDataSourceLiveData.value?.retry()
-    }
+    fun getPosts(): LiveData<PagedList<Post>> = postsRepository.getPosts()
 
-    fun refresh() {
-        postsDataSourceFactory.postsDataSourceLiveData.value?.invalidate()
-    }
+    fun getNetworkState(): LiveData<NetworkState> = postsRepository.getNetworkState()
 
-    fun getNetworkState(): LiveData<NetworkState> = Transformations.switchMap<PostsDataSource, NetworkState>(
-        postsDataSourceFactory.postsDataSourceLiveData
-    ) { it.networkState }
+    fun retry() = postsRepository.retry()
 
+    fun refresh() = postsRepository.refresh()
 }
