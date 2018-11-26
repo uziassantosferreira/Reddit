@@ -2,7 +2,6 @@ package com.uziassantosferreira.data.api.helper
 
 import com.squareup.okhttp.mockwebserver.MockResponse
 import com.squareup.okhttp.mockwebserver.MockWebServer
-import com.uziassantosferreira.data.di.Network.API_URL
 import com.uziassantosferreira.data.di.Network.API_URL_NAME
 import com.uziassantosferreira.data.di.networkModule
 import org.junit.After
@@ -12,7 +11,6 @@ import org.koin.standalone.StandAloneContext.startKoin
 import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.declare
-import org.koin.test.declareMock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)

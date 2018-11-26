@@ -66,7 +66,8 @@ class PostsRepositoryImplTest {
     @Test
     fun `should get posts and expected list`() {
         val date = Date(1000)
-        When calling getPosts.run() itReturns Flowable.just(Pair(Pagination(), listOf(Post(date = date))))
+        val nextPage = "teste"
+        When calling getPosts.run() itReturns Flowable.just(Pair(Pagination(nextPage = nextPage), listOf(Post(date = date))))
 
         val listing = repository.getPosts()
         val pagedList = getPagedList(listing)
@@ -74,6 +75,7 @@ class PostsRepositoryImplTest {
         pagedList shouldContainAll listOf(PresentationPost(date = date))
         getNetworkState(repository.getNetworkState()).status shouldBe Status.SUCCESS
     }
+
 
     @Test
     fun `should retry and expected list`() {
@@ -125,8 +127,6 @@ class PostsRepositoryImplTest {
 
     private fun getPagedListConfig() =
         PagedList.Config.Builder()
-            .setPageSize(1)
-            .setInitialLoadSizeHint(1)
             .setEnablePlaceholders(false)
             .build()
 

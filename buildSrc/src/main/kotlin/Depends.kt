@@ -58,10 +58,13 @@ object Depends {
     object Test {
         const val kluent = "org.amshove.kluent:kluent:${Versions.kluent}"
         const val mockito = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito}"
-        const val archCore = "android.arch.core:core-testing:${Versions.lifecycle}"
+        const val archCore = "androidx.arch.core:core-testing:${Versions.lifecycle}"
         const val kakao = "com.agoda.kakao:kakao:${Versions.kakao}"
-        const val espresso = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
+        const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
         const val junit = "junit:junit:${Versions.junit}"
+        const val extjunit = "androidx.test.ext:junit:${Versions.extjunit}"
+        const val runner = "androidx.test:runner:${Versions.testrunner}"
+        const val rules = "androidx.test:rules:${Versions.testrunner}"
         const val mockwebserver = "com.squareup.okhttp:mockwebserver:${Versions.mockwebserver}"
         const val koin = "org.koin:koin-test:${Versions.koin}"
     }

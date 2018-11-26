@@ -17,7 +17,7 @@ android {
         targetSdkVersion(Versions.targetSdk)
         versionCode = Versions.versionCode
         versionName = "1.0"
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.uziassantosferreira.reddit.runner.ApplicationTestRunner"
     }
     buildTypes {
         getByName("release") {
@@ -31,6 +31,10 @@ android {
         getByName("test").java.srcDirs("src/test/kotlin")
         getByName("androidTest").java.srcDirs("src/androidTest/kotlin")
     }
+
+    useLibrary("android.test.runner")
+    useLibrary("android.test.base")
+    useLibrary("android.test.mock")
 }
 
 dependencies {
@@ -54,13 +58,11 @@ dependencies {
     implementation(Depends.Glide.glide)
     kapt(Depends.Glide.glidecompiler)
 
-    testImplementation(Depends.Test.kluent)
-    testImplementation(Depends.Test.mockito)
-    testImplementation(Depends.Test.archCore)
-    testImplementation(Depends.Test.junit)
-
-    androidTestImplementation(Depends.Test.junit)
+    androidTestImplementation(Depends.Test.extjunit)
     androidTestImplementation(Depends.Test.archCore)
     androidTestImplementation(Depends.Test.kakao)
     androidTestImplementation(Depends.Test.espresso)
+    androidTestImplementation(Depends.Test.koin)
+    androidTestImplementation(Depends.Test.runner)
+    androidTestImplementation(Depends.Test.rules)
 }

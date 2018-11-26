@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_posts.*
 import kotlinx.android.synthetic.main.list_item_network_state.*
 import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class PostsFragment: BaseFragment() {
 
@@ -72,28 +71,26 @@ class PostsFragment: BaseFragment() {
     }
 
     private fun setInitialLoadingState(networkState: NetworkState?) {
-        errorMessageTextView.visibility = if (networkState?.failure != null) View.VISIBLE else View.GONE
+        textViewError.visibility = if (networkState?.failure != null) View.VISIBLE else View.GONE
         networkState?.failure?.let {
-            errorMessageTextView.text = it.getMessage(requireContext())
+            textViewError.text = it.getMessage(requireContext())
         }
 
-        retryLoadingButton.visibility = if (networkState?.status == Status.FAILED) View.VISIBLE else View.GONE
+        buttonRetry.visibility = if (networkState?.status == Status.FAILED) View.VISIBLE else View.GONE
 
         if (swipeRefreshLayout.isRefreshing){
             swipeRefreshLayout.isRefreshing = networkState?.status == Status.RUNNING
-            loadingProgressBar.visibility = View.GONE
+            progressBarLoading.visibility = View.GONE
         }else{
-            loadingProgressBar.visibility = if (networkState?.status == Status.RUNNING) View.VISIBLE else View.GONE
+            progressBarLoading.visibility = if (networkState?.status == Status.RUNNING) View.VISIBLE else View.GONE
         }
 
         postsAdapter.setNetworkState(NetworkState.LOADED)
-        retryLoadingButton.setOnClickListener { postsViewModel.retry() }
+        buttonRetry.setOnClickListener { postsViewModel.retry() }
     }
 
     private fun getPagedListConfig() =
         PagedList.Config.Builder()
-            .setPageSize(1)
-            .setInitialLoadSizeHint(1)
             .setEnablePlaceholders(false)
             .build()
 }

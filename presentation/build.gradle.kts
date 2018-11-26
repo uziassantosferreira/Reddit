@@ -18,7 +18,6 @@ android {
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
         getByName("test").java.srcDirs("src/test/kotlin")
-        getByName("androidTest").java.srcDirs("src/androidTest/kotlin")
     }
 }
 
@@ -36,9 +35,4 @@ dependencies {
     testImplementation(Depends.Test.mockito)
     testImplementation(Depends.Test.archCore)
     testImplementation(Depends.Test.junit)
-
-    androidTestImplementation(Depends.Test.junit)
-    androidTestImplementation(Depends.Test.archCore)
-    androidTestImplementation(Depends.Test.kakao)
-    androidTestImplementation(Depends.Test.espresso)
 }

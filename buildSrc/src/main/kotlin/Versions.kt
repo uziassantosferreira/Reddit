@@ -20,6 +20,8 @@ object Versions {
     const val kakao = "1.4.0"
     const val espresso = "3.1.0"
     const val junit = "4.12"
+    const val extjunit = "1.0.0"
+    const val testrunner = "1.1.0"
     const val retrofit = "2.5.0"
     const val logging = "3.12.0"
     const val mockwebserver = "2.7.5"
