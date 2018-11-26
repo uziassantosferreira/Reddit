@@ -20,7 +20,6 @@ class PostsRepositoryImpl(
         postsLiveData = LivePagedListBuilder<String, Post>(postsDataSourceFactory, pagedListConfig).build()
     }
 
-
     override fun getPosts(): LiveData<PagedList<Post>> {
         return postsLiveData
     }
