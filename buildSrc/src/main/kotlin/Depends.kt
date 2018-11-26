@@ -11,6 +11,7 @@ object Depends {
         const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
         const val cardview = "androidx.cardview:cardview:${Versions.cardview}"
         const val collapsingtoolbarlayout = "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:${Versions.material}"
+        const val customtab = "androidx.browser:browser:${Versions.customtab}"
     }
 
     object Lifecycle {

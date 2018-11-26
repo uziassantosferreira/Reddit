@@ -46,6 +46,7 @@ dependencies {
     implementation(Depends.Support.constraintLayout)
     implementation(Depends.Support.recyclerview)
     implementation(Depends.Support.cardview)
+    implementation(Depends.Support.customtab)
 
     implementation(Depends.Navigation.fragment)
     implementation(Depends.Navigation.ui)

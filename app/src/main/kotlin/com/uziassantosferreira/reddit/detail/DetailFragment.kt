@@ -26,11 +26,22 @@ import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.text.DateFormat
+import android.text.method.LinkMovementMethod
+import com.uziassantosferreira.reddit.util.customtab.CustomTabsOnClickListener
+import android.text.SpannableString
+import android.text.Spannable
+import android.text.Spanned
+import com.uziassantosferreira.reddit.util.CustomClickURLSpan
+import com.uziassantosferreira.reddit.util.customtab.CustomTabActivityHelper
+import java.util.regex.Pattern
+
 
 class DetailFragment: BaseFragment() {
 
     companion object {
         const val PROPERTY_PAGED_LIST = "pagedListDetail"
+        private val URL_PATTERN = Pattern.compile("((http|https|rstp):\\/\\/\\S*)")
+
     }
 
     private val commentsViewModel: CommentsViewModel by viewModel()
@@ -68,8 +79,8 @@ class DetailFragment: BaseFragment() {
     }
 
     private fun fillFields(post: Post) {
-        textViewText.text = post.text
         textViewText.visibility = if (post.text.isEmpty()) View.GONE else View.VISIBLE
+        addSupportToOpenChromeTab(post.text)
 
         if (post.imagePreview.isNotEmpty() && post.imagePreview.last().url.isNotEmpty()){
             val image = post.imagePreview.last()
@@ -83,6 +94,22 @@ class DetailFragment: BaseFragment() {
         }
     }
 
+    private fun addSupportToOpenChromeTab(text: String) {
+        val spannable = SpannableString(text)
+        linkUrls(spannable, CustomTabsOnClickListener(requireActivity(), CustomTabActivityHelper()))
+        textViewText.text = spannable
+        textViewText.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+    private fun linkUrls(spannable: Spannable, onClickListener: CustomClickURLSpan.OnClickListener) {
+        val matcher = URL_PATTERN.matcher(spannable)
+        while (matcher.find()) {
+            val url = spannable.toString().substring(matcher.start(), matcher.end())
+            val urlSpan = CustomClickURLSpan(url)
+            urlSpan.setOnClickListener(onClickListener)
+            spannable.setSpan(urlSpan, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+    }
     private fun setUpCollapsingToolbar(post: Post) {
         collapsingToolbarLayout.title = post.title
         collapsingToolbarLayout.subtitle = DateFormat.getDateInstance(DateFormat.FULL).format(post.date)
