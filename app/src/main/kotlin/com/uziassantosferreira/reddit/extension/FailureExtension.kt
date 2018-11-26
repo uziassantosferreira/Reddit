@@ -9,4 +9,5 @@ fun Failure.getMessage(context: Context): String = when(this){
     Failure.NoInternet -> context.getString(R.string.label_network_error)
     Failure.RequestCanceled -> context.getString(R.string.label_network_error)
     Failure.ConnectionTimeout -> context.getString(R.string.label_network_error)
+    Failure.EmptyList -> context.getString(R.string.label_empty_view)
 }

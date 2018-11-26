@@ -3,5 +3,6 @@
         \nHelp us improve your experience by sending an error report.</string>
     <string name="label_network_error">This operation could not be completed at this time. Check your internet connection and try again!</string>
     <string name="label_try_again">Try again</string>
+    <string name="label_empty_view">No items to show :(</string>
 
 </resources>

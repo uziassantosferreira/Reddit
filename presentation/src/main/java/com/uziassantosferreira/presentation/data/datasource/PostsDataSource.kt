@@ -6,6 +6,7 @@ import com.uziassantosferreira.domain.model.Pagination
 import com.uziassantosferreira.domain.requestvalue.GetPostByCommunityRequestValue
 import com.uziassantosferreira.domain.usecase.UseCase
 import com.uziassantosferreira.presentation.exception.ErrorHandler
+import com.uziassantosferreira.presentation.exception.Failure
 import com.uziassantosferreira.presentation.exception.PresentationThrowable
 import com.uziassantosferreira.presentation.mapper.PresentationPostMapper
 import com.uziassantosferreira.presentation.model.Post
@@ -38,7 +39,11 @@ class PostsDataSource(
         networkState.postValue(NetworkState.LOADING)
         compositeDisposable.add(getPosts()
             .subscribe({ result ->
-                networkState.postValue(NetworkState.LOADED)
+                if (result.second.isEmpty()){
+                    networkState.postValue(NetworkState.error(Failure.EmptyList))
+                }else {
+                    networkState.postValue(NetworkState.LOADED)
+                }
                 callback.onResult(result.second, null, result.first)
             }, { throwable ->
                 handleError(throwable) { loadInitial(params, callback) }

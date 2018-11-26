@@ -5,4 +5,5 @@ sealed class Failure {
     object NoInternet: Failure()
     object RequestCanceled: Failure()
     object ConnectionTimeout: Failure()
+    object EmptyList : Failure()
 }

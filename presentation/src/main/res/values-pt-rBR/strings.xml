@@ -3,5 +3,5 @@
         \nAjude-nos a melhorar sua experiência enviando um relatório de erros.</string>
     <string name="label_network_error">Esta operação não pôde ser concluída neste momento. Verifique sua conexão com a internet e tente novamente</string>
     <string name="label_try_again">Tentar novamente</string>
-
+    <string name="label_empty_view">Não encontramos nenhum item :(</string>
 </resources>

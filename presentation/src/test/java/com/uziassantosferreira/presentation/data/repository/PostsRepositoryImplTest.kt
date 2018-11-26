@@ -60,7 +60,8 @@ class PostsRepositoryImplTest {
         val pagedList = getPagedList(listing)
 
         pagedList.shouldBeEmpty()
-        getNetworkState(repository.getNetworkState()).status shouldBe Status.SUCCESS
+
+        getNetworkState(repository.getNetworkState()).failure shouldBe Failure.EmptyList
     }
 
     @Test
