@@ -1,4 +1,3 @@
-
 import org.jetbrains.kotlin.cli.jvm.main
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
@@ -7,6 +6,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-android-extensions")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -42,6 +42,7 @@ dependencies {
 
     implementation(Depends.Support.appcompat)
     implementation(Depends.Support.material)
+    implementation(Depends.Support.collapsingtoolbarlayout)
     implementation(Depends.Support.constraintLayout)
     implementation(Depends.Support.recyclerview)
     implementation(Depends.Support.cardview)

@@ -45,10 +45,14 @@ class PostsFragment: BaseFragment() {
     }
 
     private fun initAdapter() {
-        postsAdapter = PostsAdapter {
-            postsViewModel.retry()
-        }
+        postsAdapter = PostsAdapter({postsViewModel.retry()},
+            { clickItem(it) })
         recyclerView.adapter = postsAdapter
+    }
+
+    private fun clickItem(post: Post) {
+        val action = PostsFragmentDirections.ActionPostsFragmentToDetailFragment(post)
+        navController.navigate(action)
     }
 
     private fun initSwipeToRefresh() {

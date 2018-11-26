@@ -10,6 +10,7 @@ object Depends {
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
         const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
         const val cardview = "androidx.cardview:cardview:${Versions.cardview}"
+        const val collapsingtoolbarlayout = "com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:${Versions.material}"
     }
 
     object Lifecycle {
@@ -30,6 +31,7 @@ object Depends {
     object BuildPlugins {
         const val android = "com.android.tools.build:gradle:${Versions.androidPlugin}"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        const val safeargs = "android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
     }
 
     object Koin {

@@ -8,7 +8,8 @@ import com.uziassantosferreira.presentation.data.datasource.NetworkState
 import com.uziassantosferreira.presentation.model.Post
 import com.uziassantosferreira.reddit.R
 
-class PostsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Post,
+class PostsAdapter(private val retryCallback: () -> Unit,
+                   private val clickItem: (post: Post) -> Unit) : PagedListAdapter<Post,
         RecyclerView.ViewHolder>(PostDiffCallback) {
 
     private var networkState: NetworkState? = null
@@ -23,7 +24,7 @@ class PostsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Pos
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.list_item_post -> (holder as PostViewHolder).bindTo(getItem(position))
+            R.layout.list_item_post -> (holder as PostViewHolder).bindTo(getItem(position), clickItem)
             R.layout.list_item_network_state -> (holder as NetworkStateViewHolder).bindTo(networkState)
         }
     }

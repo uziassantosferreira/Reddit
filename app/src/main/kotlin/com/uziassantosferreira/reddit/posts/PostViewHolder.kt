@@ -14,8 +14,13 @@ import java.text.DateFormat
 
 class PostViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bindTo(post: Post?) {
+    fun bindTo(
+        post: Post?,
+        clickItem: (post: Post) -> Unit
+    ) {
         if (post == null) return
+
+        itemView.setOnClickListener { clickItem.invoke(post) }
         itemView.textViewTitle.text = post.title
         itemView.textViewAuthor.text = post.author.name
         itemView.textViewSubtitle.text = DateFormat.getDateInstance(DateFormat.FULL).format(post.date)

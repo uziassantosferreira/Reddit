@@ -19,6 +19,10 @@ android {
         getByName("main").java.srcDirs("src/main/kotlin")
         getByName("test").java.srcDirs("src/test/kotlin")
     }
+
+    androidExtensions {
+        isExperimental = true
+    }
 }
 
 dependencies {

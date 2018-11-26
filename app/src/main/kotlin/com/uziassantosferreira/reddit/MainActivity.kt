@@ -1,10 +1,12 @@
 package com.uziassantosferreira.reddit
 
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.uziassantosferreira.reddit.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 
 class MainActivity : BaseActivity() {
@@ -23,7 +25,17 @@ class MainActivity : BaseActivity() {
 
     private fun setupNavigation() {
         val navController = Navigation.findNavController(this, R.id.navHost)
-        setupActionBarWithNavController(this, navController)
+        setupWithNavController(toolbar, navController)
+
+        navController.addOnNavigatedListener { _, destination ->
+            if (destination.id == R.id.detailFragment){
+                supportActionBar?.hide()
+            } else {
+                supportActionBar?.show()
+
+            }
+
+        }
     }
 
     override fun onSupportNavigateUp() = navController.navigateUp()

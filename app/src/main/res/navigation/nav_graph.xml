@@ -11,5 +11,7 @@
     </fragment>
 
     <fragment android:id="@+id/detailFragment" android:name="com.uziassantosferreira.reddit.detail.DetailFragment"
-              android:label="DetailFragment"/>
+              android:label="DetailFragment">
+        <argument android:name="post" app:argType="com.uziassantosferreira.presentation.model.Post"/>
+    </fragment>
 </navigation>
