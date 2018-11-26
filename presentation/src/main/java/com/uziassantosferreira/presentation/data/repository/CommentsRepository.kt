@@ -7,4 +7,5 @@ import com.uziassantosferreira.presentation.model.Comment
 interface CommentsRepository: PaginationRepository<Comment> {
 
     fun getList(remoteId: String): LiveData<PagedList<Comment>>
+    fun resetList()
 }

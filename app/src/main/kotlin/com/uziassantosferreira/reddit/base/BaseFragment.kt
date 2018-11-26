@@ -20,14 +20,16 @@ abstract class BaseFragment : Fragment() {
 
     open fun setInitialLoadingState(networkState: NetworkState?) {
         textViewError.visibility = if (networkState?.failure != null) View.VISIBLE else View.GONE
+
+        buttonRetry.visibility = if (networkState?.status == Status.FAILED) View.VISIBLE else View.GONE
+        progressBarLoading.visibility = if (networkState?.status == Status.RUNNING) View.VISIBLE else View.GONE
+
         networkState?.failure?.let {
             textViewError.text = it.getMessage(requireContext())
             if (it is Failure.EmptyList){
                 buttonRetry.visibility = View.GONE
             }
         }
-        buttonRetry.visibility = if (networkState?.status == Status.FAILED) View.VISIBLE else View.GONE
         recyclerView.visibility = if (networkState?.status == Status.SUCCESS) View.VISIBLE else View.GONE
-        progressBarLoading.visibility = if (networkState?.status == Status.RUNNING) View.VISIBLE else View.GONE
     }
 }

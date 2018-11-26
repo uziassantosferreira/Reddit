@@ -14,19 +14,20 @@ import kotlin.properties.Delegates
 
 class CommentsRepositoryImpl(
     private val factory: CommentsDataSourceFactory,
-    pagedListConfig: PagedList.Config): CommentsRepository {
+    private val pagedListConfig: PagedList.Config): CommentsRepository {
 
     private var comments: LiveData<PagedList<Comment>> by Delegates.notNull()
 
     init {
+        resetList()
+    }
+
+    override fun resetList() {
         comments = LivePagedListBuilder(factory, pagedListConfig).build()
     }
 
     override fun getList(remoteId: String): LiveData<PagedList<Comment>> {
-        if (CommentsDataSource.remoteId != remoteId){
-            refresh()
-            CommentsDataSource.remoteId = remoteId
-        }
+        CommentsDataSource.remoteId = remoteId
         return comments
     }
     override fun getList(): LiveData<PagedList<Comment>> {

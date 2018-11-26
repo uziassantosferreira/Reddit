@@ -9,17 +9,17 @@ import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
 import com.uziassantosferreira.presentation.data.datasource.Status
-import com.uziassantosferreira.presentation.exception.Failure
 import com.uziassantosferreira.presentation.model.Post
 import com.uziassantosferreira.presentation.viewmodel.PostsViewModel
 import com.uziassantosferreira.reddit.R
 import com.uziassantosferreira.reddit.base.BaseFragment
-import com.uziassantosferreira.reddit.extension.getMessage
 import kotlinx.android.synthetic.main.fragment_posts.*
 import kotlinx.android.synthetic.main.include_posts_list.*
 import kotlinx.android.synthetic.main.list_item_network_state.*
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PostsFragment: BaseFragment() {
 
@@ -29,7 +29,8 @@ class PostsFragment: BaseFragment() {
 
     private val postsViewModel: PostsViewModel by viewModel()
 
-    private lateinit var postsAdapter: PostsAdapter
+    private val postsAdapter: PostsAdapter by inject{ parametersOf({postsViewModel.retry()},
+        {post: Post-> clickItem(post) }) }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -52,8 +53,6 @@ class PostsFragment: BaseFragment() {
     }
 
     private fun initAdapter() {
-        postsAdapter = PostsAdapter({postsViewModel.retry()},
-            { clickItem(it) })
         recyclerView.adapter = postsAdapter
     }
 

@@ -11,7 +11,10 @@ class CommentsViewModel(private val repository: CommentsRepository): BaseViewMod
 
     init {
         repository.setCompositeDisposable(compositeDisposable)
+        resetList()
     }
+
+    private fun resetList() = repository.resetList()
 
     fun getComments(post: Post): LiveData<PagedList<Comment>> = repository.getList(post.remoteId)
 

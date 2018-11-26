@@ -9,6 +9,7 @@ import com.uziassantosferreira.presentation.data.datasource.PostsDataSourceFacto
 import com.uziassantosferreira.presentation.data.repository.PostsRepository
 import com.uziassantosferreira.presentation.data.repository.PostsRepositoryImpl
 import com.uziassantosferreira.presentation.viewmodel.PostsViewModel
+import com.uziassantosferreira.reddit.posts.PostsAdapter
 import com.uziassantosferreira.reddit.posts.PostsFragment
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
@@ -20,6 +21,10 @@ val postsModule = module {
     single { PostsDataSourceFactory(get(USE_CASE_POST)) }
 
     single<PostsRepository> { PostsRepositoryImpl(get(), getProperty(PostsFragment.PROPERTY_PAGED_LIST)) }
+
+    factory { (retryCallback: () -> Unit,
+                      clickItem: (post: com.uziassantosferreira.presentation.model.Post) -> Unit) ->
+        PostsAdapter(retryCallback, clickItem) }
 
     viewModel { PostsViewModel(get()) }
 }

@@ -21,8 +21,10 @@ import com.uziassantosferreira.reddit.extension.getMessage
 import com.uziassantosferreira.reddit.util.GlideApp
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.list_item_network_state.*
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.text.DateFormat
 
 class DetailFragment: BaseFragment() {
@@ -33,7 +35,7 @@ class DetailFragment: BaseFragment() {
 
     private val commentsViewModel: CommentsViewModel by viewModel()
 
-    private lateinit var commentsAdapter: CommentsAdapter
+    private val commentsAdapter: CommentsAdapter by inject { parametersOf({commentsViewModel.retry()}) }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -87,7 +89,6 @@ class DetailFragment: BaseFragment() {
     }
 
     private fun initAdapter() {
-        commentsAdapter = CommentsAdapter{commentsViewModel.retry()}
         recyclerView.adapter = commentsAdapter
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
