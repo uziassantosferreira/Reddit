@@ -6,5 +6,10 @@
     <fragment android:id="@+id/postsFragment"
               android:name="com.uziassantosferreira.reddit.posts.PostsFragment"
               android:label="@string/title_posts"
-              tools:layout="@layout/fragment_posts"/>
+              tools:layout="@layout/fragment_posts">
+        <action android:id="@+id/action_postsFragment_to_detailFragment" app:destination="@id/detailFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/detailFragment" android:name="com.uziassantosferreira.reddit.detail.DetailFragment"
+              android:label="DetailFragment"/>
 </navigation>

@@ -15,6 +15,7 @@ import com.uziassantosferreira.reddit.R
 import com.uziassantosferreira.reddit.base.BaseFragment
 import com.uziassantosferreira.reddit.extension.getMessage
 import kotlinx.android.synthetic.main.fragment_posts.*
+import kotlinx.android.synthetic.main.include_posts_list.*
 import kotlinx.android.synthetic.main.list_item_network_state.*
 import org.koin.android.ext.android.setProperty
 import org.koin.android.viewmodel.ext.android.viewModel

@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.uziassantosferreira.reddit.base.BaseActivity
+import kotlinx.android.synthetic.main.include_toolbar.*
 
 class MainActivity : BaseActivity() {
 
@@ -15,6 +16,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setSupportActionBar(toolbar)
         setupNavigation()
     }
 

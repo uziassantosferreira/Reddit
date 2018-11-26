@@ -10,5 +10,21 @@
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="card_primary_title_bottom_padding">16dp</dimen>
     <dimen name="text_fields_floating_label_padding_below_text_divider">8dp</dimen>
+
+    <!-- Structure -->
     <dimen name="screen_edge_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="vertical_spacing_between_content_areas">8dp</dimen>
+
+    <!-- Layout -->
+    <dimen name="expanded_toolbar_height">80dp</dimen>
+    <dimen name="expanded_toolbar_title_margin_bottom">40dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="app_bar_height">56dp</dimen>
+
+
+    <!-- Floating action button -->
+    <dimen name="floating_action_button_margin">16dp</dimen>
+    <dimen name="floating_action_button_elevation">4dp</dimen>
+
 </resources>

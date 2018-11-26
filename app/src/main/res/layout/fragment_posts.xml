@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,18 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:clipToPadding="false"
-                android:paddingBottom="@dimen/card_padding_from_edge_of_screen_to_card"
-                android:paddingLeft="@dimen/card_padding_from_edge_of_screen_to_card"
-                android:paddingRight="@dimen/card_padding_from_edge_of_screen_to_card"
-                android:paddingTop="@dimen/card_padding_from_edge_of_screen_to_card"
-                android:scrollbarStyle="outsideOverlay"
-                tools:listitem="@layout/list_item_post"/>
+        <include layout="@layout/include_posts_list" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

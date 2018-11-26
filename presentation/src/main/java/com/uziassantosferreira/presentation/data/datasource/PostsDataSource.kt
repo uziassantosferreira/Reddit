@@ -19,6 +19,7 @@ class PostsDataSource(
 ) : PageKeyedDataSource<String, Post>() {
 
     companion object {
+        //TODO in the future view can be pass others community, backend offer support
         private const val COMMUNITY = "r/Android"
     }
 
