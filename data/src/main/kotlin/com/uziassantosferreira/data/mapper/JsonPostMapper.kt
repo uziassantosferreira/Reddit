@@ -24,6 +24,7 @@ object JsonPostMapper: Mapper<JsonPost, Post>() {
         }
         val date = if (source.createdUtc == null) Date() else Date(source.createdUtc * 1000 )
         return Post(title = source.title ?: "", imagePreview = imagePreview,
-            author = Author(name = source.authorName ?: ""), date = date, text = source.text ?: "")
+            author = Author(name = source.authorName ?: ""), date = date, text = source.text ?: "",
+            remoteId = source.id ?: "")
     }
 }

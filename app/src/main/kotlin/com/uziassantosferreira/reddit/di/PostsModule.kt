@@ -15,11 +15,13 @@ import org.koin.dsl.module.module
 
 val postsModule = module {
 
-    single<UseCase<GetPostByCommunityRequestValue, Pair<Pagination, List<Post>>>> { GetPostByCommunity(get()) }
+    single<UseCase<GetPostByCommunityRequestValue, Pair<Pagination, List<Post>>>>(USE_CASE_POST) { GetPostByCommunity(get()) }
 
-    single { PostsDataSourceFactory(get()) }
+    single { PostsDataSourceFactory(get(USE_CASE_POST)) }
 
     single<PostsRepository> { PostsRepositoryImpl(get(), getProperty(PostsFragment.PROPERTY_PAGED_LIST)) }
 
     viewModel { PostsViewModel(get()) }
 }
+
+private const val USE_CASE_POST = "useCasePost"

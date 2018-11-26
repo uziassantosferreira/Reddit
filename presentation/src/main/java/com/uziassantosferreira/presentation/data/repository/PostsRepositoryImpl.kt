@@ -17,10 +17,10 @@ class PostsRepositoryImpl(
     private var postsLiveData: LiveData<PagedList<Post>> by Delegates.notNull()
 
     init {
-        postsLiveData = LivePagedListBuilder<String, Post>(postsDataSourceFactory, pagedListConfig).build()
+        postsLiveData = LivePagedListBuilder(postsDataSourceFactory, pagedListConfig).build()
     }
 
-    override fun getPosts(): LiveData<PagedList<Post>> {
+    override fun getList(): LiveData<PagedList<Post>> {
         return postsLiveData
     }
 

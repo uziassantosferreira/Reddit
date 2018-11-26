@@ -29,6 +29,7 @@ class DataSourceImplTest {
     @Before
     fun `set up mocks`() {
         When calling service.getPostsByCommunity() itReturns Flowable.just(JsonGenericResponseWrapper())
+        When calling service.getCommentsByCommunityAndId() itReturns Flowable.just(listOf())
     }
 
     @Test
@@ -44,6 +45,25 @@ class DataSourceImplTest {
     fun `should be call service when get posts by community and expected error no internet`() {
         When calling service.getPostsByCommunity() itReturns Flowable.error(UnknownHostException())
         dataSource.getPostsByCommunity()
+            .test()
+            .assertError(DomainThrowable(Failure.NoInternet))
+            .assertNoValues()
+            .assertNotComplete()
+    }
+
+    @Test
+    fun `should be call service when get comments by community and id and expected empty`() {
+        dataSource.getCommentsByCommunityAndId()
+            .test()
+            .assertValue(Pair(Pagination(), emptyList()))
+            .assertComplete()
+            .assertNoErrors()
+    }
+
+    @Test
+    fun `should be call service when get comments by community and id and expected error no internet`() {
+        When calling service.getCommentsByCommunityAndId() itReturns Flowable.error(UnknownHostException())
+        dataSource.getCommentsByCommunityAndId()
             .test()
             .assertError(DomainThrowable(Failure.NoInternet))
             .assertNoValues()

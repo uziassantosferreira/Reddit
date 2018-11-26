@@ -96,6 +96,7 @@ class PostsFragment: BaseFragment() {
 
     private fun getPagedListConfig() =
         PagedList.Config.Builder()
+            .setPageSize(15)
             .setEnablePlaceholders(false)
             .build()
 }

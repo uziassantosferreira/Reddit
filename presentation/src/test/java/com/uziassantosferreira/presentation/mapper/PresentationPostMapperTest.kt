@@ -15,17 +15,18 @@ class PresentationPostMapperTest {
         private const val FAKE_URL = "www.image.com.br"
         private const val FAKE_TITLE = "Teste Title"
         private const val FAKE_AUTHOR_NAME = "Teste"
+        private const val FAKE_ID = "f311F"
         private val FAKE_PRESENTATION_IMAGE = com.uziassantosferreira.presentation.model.Image(url = FAKE_URL)
         private val FAKE_IMAGE = Image(url = FAKE_URL)
         private val FAKE_DATE = Date(1000)
     }
 
     private val domain = Post(title = FAKE_TITLE, date = FAKE_DATE, author = Author(FAKE_AUTHOR_NAME),
-        imagePreview = listOf(FAKE_IMAGE, FAKE_IMAGE))
+        imagePreview = listOf(FAKE_IMAGE, FAKE_IMAGE), remoteId = FAKE_ID)
 
     private val presentation = Presentation(title = FAKE_TITLE, date = FAKE_DATE,
         author = com.uziassantosferreira.presentation.model.Author(FAKE_AUTHOR_NAME),
-        imagePreview = listOf(FAKE_PRESENTATION_IMAGE, FAKE_PRESENTATION_IMAGE))
+        imagePreview = listOf(FAKE_PRESENTATION_IMAGE, FAKE_PRESENTATION_IMAGE), remoteId = FAKE_ID)
 
     @Test
     fun `should be correctly transform and expected domain`() {

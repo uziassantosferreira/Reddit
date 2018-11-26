@@ -1,5 +1,6 @@
 package com.uziassantosferreira.data.api
 
+import com.uziassantosferreira.data.model.JsonComment
 import com.uziassantosferreira.data.model.JsonGenericList
 import com.uziassantosferreira.data.model.JsonGenericResponseWrapper
 import com.uziassantosferreira.data.model.JsonPost
@@ -14,5 +15,12 @@ interface RedditService {
     fun getPostsByCommunity(@Path("community") input: String = "",
                             @Query("after") nextPage: String = "",
                             @Query("raw_json") rawJson: Int = 1): Flowable<JsonGenericResponseWrapper<JsonGenericList<JsonPost>>>
+
+
+    @GET("{community}/comments/{remoteId}/.json")
+    fun getCommentsByCommunityAndId(@Path("community") input: String = "",
+                                    @Path("remoteId") remoteId: String = "",
+                                    @Query("after") nextPage: String = "",
+                                    @Query("raw_json") rawJson: Int = 1): Flowable<List<JsonGenericResponseWrapper<JsonGenericList<JsonComment>>>>
 
 }

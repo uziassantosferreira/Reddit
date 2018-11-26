@@ -6,12 +6,14 @@ import java.util.Date
 
 data class Post(val title: String = "", val author: Author = Author(),
                 val imagePreview: List<Image> = listOf(), val date: Date = Date(),
-                val text: String = "") : Parcelable {
+                val text: String = "",
+                val remoteId: String = "") : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readParcelable(Author::class.java.classLoader)!!,
         parcel.createTypedArrayList(Image)!!,
         Date(parcel.readLong()),
+        parcel.readString()!!,
         parcel.readString()!!
     )
 
@@ -21,6 +23,7 @@ data class Post(val title: String = "", val author: Author = Author(),
         parcel.writeTypedList(imagePreview)
         parcel.writeLong(date.time)
         parcel.writeString(text)
+        parcel.writeString(remoteId)
     }
 
     override fun describeContents(): Int {

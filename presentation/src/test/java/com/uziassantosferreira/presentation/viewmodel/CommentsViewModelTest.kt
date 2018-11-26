@@ -6,7 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.nhaarman.mockitokotlin2.mock
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
-import com.uziassantosferreira.presentation.data.repository.PostsRepository
+import com.uziassantosferreira.presentation.data.repository.CommentsRepository
+import com.uziassantosferreira.presentation.model.Comment
 import com.uziassantosferreira.presentation.model.Post
 import org.amshove.kluent.*
 import org.junit.Before
@@ -17,15 +18,15 @@ import org.mockito.InjectMocks
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class PostsViewModelTest {
+class CommentsViewModelTest {
 
-    private val repository: PostsRepository = mock()
+    private val repository: CommentsRepository = mock()
 
-    private val postsLiveData: LiveData<PagedList<Post>> = MutableLiveData()
+    private val commentsLiveData: LiveData<PagedList<Comment>> = MutableLiveData()
     private val networkStateLiveData: LiveData<NetworkState> = MutableLiveData()
 
     @InjectMocks
-    private lateinit var viewModel: PostsViewModel
+    private lateinit var viewModel: CommentsViewModel
 
     @Rule
     @JvmField
@@ -33,16 +34,16 @@ class PostsViewModelTest {
 
     @Before
     fun `set up mocks`() {
-        When calling repository.getList() itReturns postsLiveData
+        When calling repository.getList("") itReturns commentsLiveData
         When calling repository.getNetworkState() itReturns networkStateLiveData
     }
 
     @Test
     fun `should get posts and expected call repository`() {
-        val result = viewModel.getPosts()
+        val result = viewModel.getComments(Post())
 
-        result shouldBe postsLiveData
-        Verify on repository that repository.getList() was called
+        result shouldBe commentsLiveData
+        Verify on repository that repository.getList("") was called
     }
 
     @Test
@@ -58,12 +59,5 @@ class PostsViewModelTest {
         viewModel.retry()
 
         Verify on repository that repository.retry() was called
-    }
-
-    @Test
-    fun `should call refresh and expected call repository`() {
-        viewModel.refresh()
-
-        Verify on repository that repository.refresh() was called
     }
 }

@@ -1,22 +1,22 @@
-package com.uziassantosferreira.reddit.posts
+package com.uziassantosferreira.reddit.detail
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
-import com.uziassantosferreira.presentation.model.Post
+import com.uziassantosferreira.presentation.model.Comment
 import com.uziassantosferreira.reddit.R
+import com.uziassantosferreira.reddit.posts.NetworkStateViewHolder
 
-class PostsAdapter(private val retryCallback: () -> Unit,
-                   private val clickItem: (post: Post) -> Unit) : PagedListAdapter<Post,
+class CommentsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<Comment,
         RecyclerView.ViewHolder>(PostDiffCallback) {
 
     private var networkState: NetworkState? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.list_item_post -> PostViewHolder.create(parent)
+            R.layout.list_item_comment -> CommentViewHolder.create(parent)
             R.layout.list_item_network_state -> NetworkStateViewHolder.create(parent, retryCallback)
             else -> throw IllegalArgumentException("unknown view type")
         }
@@ -24,7 +24,7 @@ class PostsAdapter(private val retryCallback: () -> Unit,
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.list_item_post -> (holder as PostViewHolder).bindTo(getItem(position), clickItem)
+            R.layout.list_item_comment -> (holder as CommentViewHolder).bindTo(getItem(position))
             R.layout.list_item_network_state -> (holder as NetworkStateViewHolder).bindTo(networkState)
         }
     }
@@ -37,7 +37,7 @@ class PostsAdapter(private val retryCallback: () -> Unit,
         return if (hasExtraRow() && position == itemCount - 1) {
             R.layout.list_item_network_state
         } else {
-            R.layout.list_item_post
+            R.layout.list_item_comment
         }
     }
 
@@ -45,14 +45,6 @@ class PostsAdapter(private val retryCallback: () -> Unit,
         return super.getItemCount() + if (hasExtraRow()) 1 else 0
     }
 
-    /**
-     * Set the current network state to the adapter
-     * but this work only after the initial load
-     * and the adapter already have list to add new loading raw to it
-     * so the initial loading state the activity responsible for handle it
-     *
-     * @param newNetworkState the new network state
-     */
     fun setNetworkState(newNetworkState: NetworkState?) {
         val previousState = this.networkState
         val hadExtraRow = hasExtraRow()
@@ -70,12 +62,12 @@ class PostsAdapter(private val retryCallback: () -> Unit,
     }
 
     companion object {
-        val PostDiffCallback = object : DiffUtil.ItemCallback<Post>() {
-            override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-                return oldItem.remoteId == newItem.remoteId
+        val PostDiffCallback = object : DiffUtil.ItemCallback<Comment>() {
+            override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+                return oldItem.text == newItem.text
             }
 
-            override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+            override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean {
                 return oldItem == newItem
             }
         }

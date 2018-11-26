@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:elevation="@dimen/card_elevation"
+        android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+        android:background="?attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        android:layout_margin="@dimen/card_space_between_cards"
+        android:layout_height="wrap_content"
+        android:focusable="true">
+
+    <TextView
+            android:id="@+id/textViewText"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Uzias"
+            android:padding="@dimen/card_left_and_right_padding" />
+
+
+</androidx.cardview.widget.CardView>

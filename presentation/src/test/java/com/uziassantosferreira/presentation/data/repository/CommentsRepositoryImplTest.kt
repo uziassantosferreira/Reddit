@@ -1,18 +1,17 @@
+package com.uziassantosferreira.presentation.data.repository
+
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.nhaarman.mockitokotlin2.mock
 import com.uziassantosferreira.domain.exception.DomainThrowable
+import com.uziassantosferreira.domain.model.Comment
 import com.uziassantosferreira.domain.model.Pagination
-import com.uziassantosferreira.domain.model.Post
-import com.uziassantosferreira.presentation.model.Post as PresentationPost
-import com.uziassantosferreira.domain.requestvalue.GetPostByCommunityRequestValue
+import com.uziassantosferreira.domain.requestvalue.GetCommentsByCommunityAndRemoteIdRequestValue
 import com.uziassantosferreira.domain.usecase.UseCase
+import com.uziassantosferreira.presentation.data.datasource.CommentsDataSourceFactory
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
-import com.uziassantosferreira.presentation.data.datasource.PostsDataSourceFactory
 import com.uziassantosferreira.presentation.data.datasource.Status
-import com.uziassantosferreira.presentation.data.repository.PostsRepositoryImpl
 import com.uziassantosferreira.presentation.exception.Failure
 import com.uziassantosferreira.presentation.util.RxImmediateSchedulerRule
 import io.reactivex.Flowable
@@ -20,9 +19,8 @@ import io.reactivex.disposables.CompositeDisposable
 import org.amshove.kluent.*
 import org.junit.Rule
 import org.junit.Test
-import java.util.Date
 
-class PostsRepositoryImplTest {
+class CommentsRepositoryImplTest {
 
     @Rule
     @JvmField
@@ -32,31 +30,31 @@ class PostsRepositoryImplTest {
     @JvmField
     val rule = InstantTaskExecutorRule()
 
-    private val getPosts: UseCase<GetPostByCommunityRequestValue,
-            Pair<Pagination, List<Post>>> = mock()
+    private val getComments: UseCase<GetCommentsByCommunityAndRemoteIdRequestValue,
+            Pair<Pagination, List<Comment>>> = com.nhaarman.mockitokotlin2.mock()
 
-    private val factory = PostsDataSourceFactory(getPosts)
+    private val factory = CommentsDataSourceFactory(getComments)
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val repository = PostsRepositoryImpl(factory, getPagedListConfig()).apply {
+    private val repository = CommentsRepositoryImpl(factory, getPagedListConfig()).apply {
         setCompositeDisposable(compositeDisposable)
     }
 
     @Test
-    fun `should get posts and expected failed`() {
-        When calling getPosts.run() itReturns Flowable.error(DomainThrowable())
+    fun `should get comments and expected failed`() {
+        When calling getComments.run() itReturns Flowable.error(DomainThrowable())
 
-        val listing = repository.getList()
+        val listing = repository.getList("")
         getPagedList(listing)
         getNetworkState(repository.getNetworkState()).failure shouldBe Failure.Generic
     }
 
     @Test
-    fun `should get posts and expected empty list`() {
-        When calling getPosts.run() itReturns Flowable.just(Pair(Pagination(), listOf()))
+    fun `should get comments and expected empty list`() {
+        When calling getComments.run() itReturns Flowable.just(Pair(Pagination(), listOf()))
 
-        val listing = repository.getList()
+        val listing = repository.getList("")
         val pagedList = getPagedList(listing)
 
         pagedList.shouldBeEmpty()
@@ -65,55 +63,59 @@ class PostsRepositoryImplTest {
     }
 
     @Test
-    fun `should get posts and expected list`() {
-        val date = Date(1000)
+    fun `should get comments and expected list`() {
         val nextPage = "teste"
-        When calling getPosts.run() itReturns Flowable.just(Pair(Pagination(nextPage = nextPage), listOf(Post(date = date))))
+        When calling getComments.run() itReturns Flowable.just(Pair(Pagination(nextPage = nextPage), listOf(Comment())))
 
-        val listing = repository.getList()
+        val listing = repository.getList("")
         val pagedList = getPagedList(listing)
 
-        pagedList shouldContainAll listOf(PresentationPost(date = date))
+        pagedList shouldContainAll listOf(com.uziassantosferreira.presentation.model.Comment())
         getNetworkState(repository.getNetworkState()).status shouldBe Status.SUCCESS
     }
 
 
     @Test
     fun `should retry and expected list`() {
-        When calling getPosts.run() itReturns Flowable.error(DomainThrowable())
-        val listing = repository.getList()
+        When calling getComments.run() itReturns Flowable.error(DomainThrowable())
+        val listing = repository.getList("")
         getPagedList(listing)
         getNetworkState(repository.getNetworkState()).status shouldBe Status.FAILED
-
-        val date = Date(1000)
-        When calling getPosts.run() itReturns Flowable.just(Pair(Pagination(), listOf(Post(date = date))))
+        
+        When calling getComments.run() itReturns Flowable.just(Pair(Pagination(), listOf(Comment())))
         repository.retry()
         val pagedList = getPagedList(listing)
-        pagedList shouldContainAll listOf(PresentationPost(date = date))
+        pagedList shouldContainAll listOf(com.uziassantosferreira.presentation.model.Comment())
         getNetworkState(repository.getNetworkState()).status shouldBe Status.SUCCESS
     }
 
     @Test
     fun `should refresh and expected list`() {
-        val date = Date(1000)
-        When calling getPosts.run() itReturns Flowable.just(Pair(Pagination(), listOf(Post(date = date))))
-        val listing = repository.getList()
+        When calling getComments.run() itReturns Flowable.just(Pair(Pagination(), listOf(Comment())))
+        val listing = repository.getList("")
 
         val pagedList = getPagedList(listing)
-        pagedList shouldContainAll listOf(PresentationPost(date = date))
+        pagedList shouldContainAll listOf(com.uziassantosferreira.presentation.model.Comment())
         getNetworkState(repository.getNetworkState()).status shouldBe Status.SUCCESS
 
-        When calling getPosts.run() itReturns Flowable.just(Pair(Pagination(), listOf(Post(date = date),
-            Post(date = date))))
+        When calling getComments.run() itReturns Flowable.just(Pair(
+            Pagination(), listOf(
+                Comment(),
+                Comment()
+            )))
 
         repository.refresh()
 
-        pagedList shouldContainAll listOf(PresentationPost(date = date),PresentationPost(date = date))
+        pagedList shouldContainAll listOf(
+            com.uziassantosferreira.presentation.model.Comment(),
+            com.uziassantosferreira.presentation.model.Comment()
+        )
         getNetworkState(repository.getNetworkState()).status shouldBe Status.SUCCESS
     }
 
-    private fun getPagedList(listing: LiveData<PagedList<PresentationPost>>): PagedList<PresentationPost> {
-        val observer = LoggingObserver<PagedList<PresentationPost>>()
+    private fun getPagedList(listing: LiveData<PagedList<com.uziassantosferreira.presentation.model.Comment>>): 
+            PagedList<com.uziassantosferreira.presentation.model.Comment> {
+        val observer = LoggingObserver<PagedList<com.uziassantosferreira.presentation.model.Comment>>()
         listing.observeForever(observer)
         observer.value.shouldNotBeNull()
         return observer.value!!

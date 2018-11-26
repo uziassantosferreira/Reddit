@@ -77,6 +77,28 @@
                     android:linksClickable="true"
                     android:paddingTop="@dimen/screen_edge_margin" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    android:clipToPadding="false"
+                    android:paddingBottom="@dimen/card_padding_from_edge_of_screen_to_card"
+                    android:paddingLeft="@dimen/card_padding_from_edge_of_screen_to_card"
+                    android:paddingRight="@dimen/card_padding_from_edge_of_screen_to_card"
+                    android:paddingTop="@dimen/card_padding_from_edge_of_screen_to_card"
+                    android:clickable="false"
+                    tools:listitem="@layout/list_item_comment"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:nestedScrollingEnabled="false"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"/>
+
+            <include
+                    layout="@layout/list_item_network_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

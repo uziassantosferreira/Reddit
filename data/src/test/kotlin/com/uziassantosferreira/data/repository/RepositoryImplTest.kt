@@ -2,6 +2,7 @@ package com.uziassantosferreira.data.repository
 
 import com.nhaarman.mockitokotlin2.mock
 import com.uziassantosferreira.data.datasource.DataSource
+import com.uziassantosferreira.domain.model.Comment
 import com.uziassantosferreira.domain.model.Pagination
 import com.uziassantosferreira.domain.model.Post
 import io.reactivex.Flowable
@@ -23,10 +24,12 @@ class RepositoryImplTest {
     private lateinit var repository: RepositoryImpl
 
     private val postsResult = Pair(Pagination(), emptyList<Post>())
+    private val commentsResult = Pair(Pagination(), emptyList<Comment>())
 
     @Before
     fun `set up mocks`() {
         When calling dataSource.getPostsByCommunity() itReturns Flowable.just(postsResult)
+        When calling dataSource.getCommentsByCommunityAndId() itReturns Flowable.just(commentsResult)
     }
 
     @Test
@@ -34,6 +37,15 @@ class RepositoryImplTest {
         repository.getPostsByCommunity()
             .test()
             .assertValue(postsResult)
+            .assertComplete()
+            .assertNoErrors()
+    }
+
+    @Test
+    fun `should be call data source when get comments by community and id and expected empty pair`() {
+        repository.getCommentsByCommunityAndId()
+            .test()
+            .assertValue(commentsResult)
             .assertComplete()
             .assertNoErrors()
     }

@@ -12,13 +12,13 @@ import kotlin.properties.Delegates
 class PostsDataSourceFactory(private val getPostByCommunity:
                              UseCase<GetPostByCommunityRequestValue,
                                      Pair<Pagination, List<com.uziassantosferreira.domain.model.Post>>>)
-    : DataSource.Factory<String, Post>() {
+    : DataSource.Factory<Pagination, Post>() {
 
     var compositeDisposable: CompositeDisposable by Delegates.notNull()
 
     val postsDataSourceLiveData = MutableLiveData<PostsDataSource>()
 
-    override fun create(): DataSource<String, Post> {
+    override fun create(): DataSource<Pagination, Post> {
         val usersDataSource = PostsDataSource(
             getPostByCommunity,
             compositeDisposable
