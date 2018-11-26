@@ -31,12 +31,23 @@ Reddit Application
 ## Showcase
 
 <p align="center">
+
   <img src="showcase/showcase_1.png" align="center" width=150>
   <img src="showcase/showcase_2.png" align="center" width=150>
   <img src="showcase/showcase_3.png" align="center" width=150>
   <img src="showcase/showcase_4.png" align="center" width=150>
   <br /><br />
   <img src="showcase/showcase.gif" align="center" width=150>
+
+</p>
+
+### Land Support
+
+<p align="center">
+
+  <img src="showcase/land_showcase_1.png" align="center" width=400>
+  <br /><br />
+  <img src="showcase/land_showcase_2.png" align="center" width=400>
 
 </p>
 
@@ -49,10 +60,10 @@ The software produced by this architecture is going to be:
 
 <img src="architecture/clean.png"/>
 
-Independent of Frameworks.
-Testable.
-Independent of UI.
-Independent of Database.
+Independent of Frameworks. </br>
+Testable. </br>
+Independent of UI. </br>
+Independent of Database. </br>
 
 <img src="architecture/architecture_1.png" width="600"/>
 
