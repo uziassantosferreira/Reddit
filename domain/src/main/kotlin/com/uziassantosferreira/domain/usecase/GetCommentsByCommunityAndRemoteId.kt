@@ -15,5 +15,8 @@ class GetCommentsByCommunityAndRemoteId(private val repository: Repository):
         if (requestValues == null){ throw RequestValueNullPointException() }
         return repository.getCommentsByCommunityAndId(requestValues.community,
             requestValues.remoteId, requestValues.page)
+            .map {
+            Pair(it.first, it.second.filter { it.text.isNotEmpty() })
+        }
     }
 }
