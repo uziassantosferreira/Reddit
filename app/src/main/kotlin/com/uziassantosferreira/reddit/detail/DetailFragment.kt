@@ -31,6 +31,7 @@ import com.uziassantosferreira.reddit.util.customtab.CustomTabsOnClickListener
 import android.text.SpannableString
 import android.text.Spannable
 import android.text.Spanned
+import androidx.core.view.ViewCompat
 import com.uziassantosferreira.reddit.util.CustomClickURLSpan
 import com.uziassantosferreira.reddit.util.customtab.CustomTabActivityHelper
 import java.util.regex.Pattern
