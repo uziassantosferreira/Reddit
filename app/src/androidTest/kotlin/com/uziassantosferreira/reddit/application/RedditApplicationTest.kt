@@ -2,6 +2,7 @@ package com.uziassantosferreira.reddit.application
 
 import android.app.Application
 import com.uziassantosferreira.domain.repository.Repository
+import com.uziassantosferreira.reddit.di.detailModule
 import com.uziassantosferreira.reddit.di.postsModule
 import com.uziassantosferreira.reddit.mocks.FakeRepository
 import org.koin.android.ext.android.startKoin
@@ -15,8 +16,8 @@ class RedditApplicationTest: Application() {
         startDi()
     }
 
-    fun startDi(){
-        startKoin(this, listOf(applicationModule, postsModule))
+    private fun startDi(){
+        startKoin(this, listOf(applicationModule, postsModule, detailModule))
     }
 }
 

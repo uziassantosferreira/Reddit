@@ -10,14 +10,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
-import com.uziassantosferreira.presentation.data.datasource.Status
-import com.uziassantosferreira.presentation.exception.Failure
 import com.uziassantosferreira.presentation.model.Comment
-import com.uziassantosferreira.presentation.model.Post
 import com.uziassantosferreira.presentation.viewmodel.CommentsViewModel
 import com.uziassantosferreira.reddit.R
 import com.uziassantosferreira.reddit.base.BaseFragment
-import com.uziassantosferreira.reddit.extension.getMessage
 import com.uziassantosferreira.reddit.util.GlideApp
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.list_item_network_state.*
@@ -31,18 +27,15 @@ import com.uziassantosferreira.reddit.util.customtab.CustomTabsOnClickListener
 import android.text.SpannableString
 import android.text.Spannable
 import android.text.Spanned
+import android.util.Patterns
 import androidx.core.app.ShareCompat
-import androidx.core.view.ViewCompat
 import com.uziassantosferreira.reddit.util.CustomClickURLSpan
 import com.uziassantosferreira.reddit.util.customtab.CustomTabActivityHelper
-import java.util.regex.Pattern
-
 
 class DetailFragment: BaseFragment() {
 
     companion object {
         const val PROPERTY_PAGED_LIST = "pagedListDetail"
-        private val URL_PATTERN = Pattern.compile("((http|https|rstp):\\/\\/\\S*)")
     }
 
     private val commentsViewModel: CommentsViewModel by viewModel()
@@ -113,7 +106,7 @@ class DetailFragment: BaseFragment() {
     }
 
     private fun linkUrls(spannable: Spannable, onClickListener: CustomClickURLSpan.OnClickListener) {
-        val matcher = URL_PATTERN.matcher(spannable)
+        val matcher = Patterns.WEB_URL.matcher(spannable)
         while (matcher.find()) {
             val url = spannable.toString().substring(matcher.start(), matcher.end())
             val urlSpan = CustomClickURLSpan(url)

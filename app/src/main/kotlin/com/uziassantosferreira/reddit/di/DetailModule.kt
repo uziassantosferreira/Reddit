@@ -14,7 +14,7 @@ import com.uziassantosferreira.reddit.detail.DetailFragment
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
-val commentsModule = module {
+val detailModule = module {
 
     single<UseCase<GetCommentsByCommunityAndRemoteIdRequestValue,
             Pair<Pagination, List<Comment>>>>(name = USE_CASE_COMMENT) { GetCommentsByCommunityAndRemoteId(get()) }
