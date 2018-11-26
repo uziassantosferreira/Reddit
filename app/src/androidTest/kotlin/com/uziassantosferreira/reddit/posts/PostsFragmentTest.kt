@@ -28,6 +28,7 @@ class PostsFragmentTest {
     fun shouldBeShowList() {
         FakeRepository.fakeStatus = FakeStatus.SUCCESS
         rule.launchActivity(getIntent())
+        cleanDependencies()
         screen {
             recyclerView {
                 isVisible()
@@ -44,6 +45,7 @@ class PostsFragmentTest {
     fun shouldBeShowLoading() {
         FakeRepository.fakeStatus = FakeStatus.LOADING
         rule.launchActivity(getIntent())
+        cleanDependencies()
         screen {
             loading {
                 isVisible()
@@ -55,11 +57,17 @@ class PostsFragmentTest {
     fun shouldBeShowError() {
         FakeRepository.fakeStatus = FakeStatus.FAILURE
         rule.launchActivity(getIntent())
+        cleanDependencies()
         screen {
             error {
                 isVisible()
             }
         }
+    }
+
+    private fun cleanDependencies() {
+        (rule.activity.application as RedditApplicationTest).getKoin().close()
+        (rule.activity.application as RedditApplicationTest).startDi()
     }
 
     private fun getIntent(): Intent {

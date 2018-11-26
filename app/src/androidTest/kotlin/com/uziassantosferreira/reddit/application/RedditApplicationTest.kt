@@ -16,7 +16,7 @@ class RedditApplicationTest: Application() {
         startDi()
     }
 
-    private fun startDi(){
+    fun startDi(){
         startKoin(this, listOf(applicationModule, postsModule, detailModule))
     }
 }

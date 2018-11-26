@@ -76,6 +76,13 @@ This layer is using [Lifecycle library](https://developer.android.com/topic/libr
 * __Domain__ - in this module are declared the application's use cases.
 * __Data__ - declares the basic operations that must be provided by the application's repository and the basic data classes used as [DTO](https://en.wikipedia.org/wiki/Data_transfer_object) with implementation to get a remote data in the [API Reddit](https://www.reddit.com/dev/api/).
 
+<p align="center">
+  <img src="test/test.png" align="center">
+</p>
+
+One of the most importants gains that the Clean Architecture brings to the project is the fact that all business logic gets isolated, it means, all code worthy to be tested is well encapsulated on classes with low dependency on OS components. This pattern alied with a Dependency Injection Container and Mock Frameworks (such as [Mockito](http://site.mockito.org/) and Junit allows the developer to take full advantage of Unit Tests.   
+
+
 ## Libraries and tools used in the project
 
 ### Android
