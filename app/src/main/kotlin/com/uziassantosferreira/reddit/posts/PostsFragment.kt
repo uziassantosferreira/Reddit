@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
 import com.uziassantosferreira.presentation.data.datasource.Status
+import com.uziassantosferreira.presentation.exception.Failure
 import com.uziassantosferreira.presentation.model.Post
 import com.uziassantosferreira.presentation.viewmodel.PostsViewModel
 import com.uziassantosferreira.reddit.R
@@ -42,6 +43,12 @@ class PostsFragment: BaseFragment() {
         initAdapter()
         initSwipeToRefresh()
         subscribeLiveData()
+
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        buttonRetry.setOnClickListener { postsViewModel.retry() }
     }
 
     private fun initAdapter() {
@@ -75,23 +82,13 @@ class PostsFragment: BaseFragment() {
             })
     }
 
-    private fun setInitialLoadingState(networkState: NetworkState?) {
-        textViewError.visibility = if (networkState?.failure != null) View.VISIBLE else View.GONE
-        networkState?.failure?.let {
-            textViewError.text = it.getMessage(requireContext())
-        }
-
-        buttonRetry.visibility = if (networkState?.status == Status.FAILED) View.VISIBLE else View.GONE
-
+    override fun setInitialLoadingState(networkState: NetworkState?) {
+        super.setInitialLoadingState(networkState)
         if (swipeRefreshLayout.isRefreshing){
             swipeRefreshLayout.isRefreshing = networkState?.status == Status.RUNNING
             progressBarLoading.visibility = View.GONE
-        }else{
-            progressBarLoading.visibility = if (networkState?.status == Status.RUNNING) View.VISIBLE else View.GONE
         }
-
         postsAdapter.setNetworkState(NetworkState.LOADED)
-        buttonRetry.setOnClickListener { postsViewModel.retry() }
     }
 
     private fun getPagedListConfig() =

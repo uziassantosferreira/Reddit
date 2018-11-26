@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
 import com.uziassantosferreira.presentation.data.datasource.Status
+import com.uziassantosferreira.presentation.exception.Failure
 import com.uziassantosferreira.presentation.model.Comment
 import com.uziassantosferreira.presentation.model.Post
 import com.uziassantosferreira.presentation.viewmodel.CommentsViewModel
@@ -46,11 +48,26 @@ class DetailFragment: BaseFragment() {
 
         initAdapter()
         subscribeLiveData(post)
+        setUpCollapsingToolbar(post)
+        fillFields(post)
+        setUpToolbar()
+        setOnClickListeners()
+    }
 
-        collapsingToolbarLayout.title = post.title
-        collapsingToolbarLayout.subtitle = DateFormat.getDateInstance(DateFormat.FULL).format(post.date)
+    private fun setOnClickListeners() {
+        buttonRetry.setOnClickListener { commentsViewModel.retry() }
+    }
 
+    private fun setUpToolbar() {
+        toolbar.setNavigationIcon(R.drawable.ic_close)
+        toolbar.setNavigationOnClickListener {
+            navController.navigateUp()
+        }
+    }
+
+    private fun fillFields(post: Post) {
         textViewText.text = post.text
+        textViewText.visibility = if (post.text.isEmpty()) View.GONE else View.VISIBLE
 
         if (post.imagePreview.isNotEmpty() && post.imagePreview.last().url.isNotEmpty()){
             val image = post.imagePreview.last()
@@ -62,17 +79,18 @@ class DetailFragment: BaseFragment() {
         }else {
             Glide.with(this).clear(imageViewThumb)
         }
-        toolbar.setNavigationIcon(R.drawable.ic_close)
-        toolbar.setNavigationOnClickListener {
-            navController.navigateUp()
-        }
+    }
+
+    private fun setUpCollapsingToolbar(post: Post) {
+        collapsingToolbarLayout.title = post.title
+        collapsingToolbarLayout.subtitle = DateFormat.getDateInstance(DateFormat.FULL).format(post.date)
     }
 
     private fun initAdapter() {
         commentsAdapter = CommentsAdapter{commentsViewModel.retry()}
         recyclerView.adapter = commentsAdapter
+        recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
-
 
     private fun subscribeLiveData(post: Post) {
         commentsViewModel.getComments(post).observe(this,
@@ -84,21 +102,13 @@ class DetailFragment: BaseFragment() {
                 }else {
                     commentsAdapter.setNetworkState(it)
                 }
+
             })
     }
 
-    private fun setInitialLoadingState(networkState: NetworkState?) {
-        textViewError.visibility = if (networkState?.failure != null) View.VISIBLE else View.GONE
-        networkState?.failure?.let {
-            textViewError.text = it.getMessage(requireContext())
-        }
-
-        buttonRetry.visibility = if (networkState?.status == Status.FAILED) View.VISIBLE else View.GONE
-
-        progressBarLoading.visibility = if (networkState?.status == Status.RUNNING) View.VISIBLE else View.GONE
-
+    override fun setInitialLoadingState(networkState: NetworkState?) {
+        super.setInitialLoadingState(networkState)
         commentsAdapter.setNetworkState(NetworkState.LOADED)
-        buttonRetry.setOnClickListener { commentsViewModel.retry() }
     }
 
     private fun getPagedListConfig() =

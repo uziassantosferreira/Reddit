@@ -17,6 +17,7 @@ class CommentsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             R.layout.list_item_comment -> CommentViewHolder.create(parent)
+            R.layout.list_item_header -> HeaderViewHolder.create(parent)
             R.layout.list_item_network_state -> NetworkStateViewHolder.create(parent, retryCallback)
             else -> throw IllegalArgumentException("unknown view type")
         }
@@ -24,7 +25,8 @@ class CommentsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.list_item_comment -> (holder as CommentViewHolder).bindTo(getItem(position))
+            R.layout.list_item_header -> (holder as HeaderViewHolder).bindTo(R.string.label_comments)
+            R.layout.list_item_comment -> (holder as CommentViewHolder).bindTo(getItem(position - 1))
             R.layout.list_item_network_state -> (holder as NetworkStateViewHolder).bindTo(networkState)
         }
     }
@@ -34,15 +36,15 @@ class CommentsAdapter(private val retryCallback: () -> Unit) : PagedListAdapter<
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (hasExtraRow() && position == itemCount - 1) {
-            R.layout.list_item_network_state
-        } else {
-            R.layout.list_item_comment
+        return when {
+            position == 0 -> R.layout.list_item_header
+            hasExtraRow() && position == itemCount - 1 -> R.layout.list_item_network_state
+            else -> R.layout.list_item_comment
         }
     }
 
     override fun getItemCount(): Int {
-        return super.getItemCount() + if (hasExtraRow()) 1 else 0
+        return super.getItemCount() + if (hasExtraRow()) 2 else 1
     }
 
     fun setNetworkState(newNetworkState: NetworkState?) {

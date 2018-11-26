@@ -88,6 +88,7 @@
                     android:paddingRight="@dimen/card_padding_from_edge_of_screen_to_card"
                     android:paddingTop="@dimen/card_padding_from_edge_of_screen_to_card"
                     android:clickable="false"
+                    android:visibility="gone"
                     tools:listitem="@layout/list_item_comment"
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:nestedScrollingEnabled="false"
@@ -96,8 +97,8 @@
 
             <include
                     layout="@layout/list_item_network_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
 
         </LinearLayout>
 

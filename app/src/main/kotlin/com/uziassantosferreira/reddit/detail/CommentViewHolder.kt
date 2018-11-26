@@ -14,6 +14,7 @@ class CommentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         if (comment == null) return
 
         itemView.textViewText.text = comment.text
+        itemView.textViewAuthor.text = comment.author.name
     }
 
     companion object {
