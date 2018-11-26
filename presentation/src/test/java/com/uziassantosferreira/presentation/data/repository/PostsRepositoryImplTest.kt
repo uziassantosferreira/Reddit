@@ -89,7 +89,7 @@ class PostsRepositoryImplTest {
         pagedList shouldContainAll listOf(PresentationPost(date = date))
         getNetworkState(repository.getNetworkState()).status shouldBe Status.SUCCESS
     }
-    
+
     @Test
     fun `should refresh and expected list`() {
         val date = Date(1000)
