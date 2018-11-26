@@ -7,4 +7,4 @@ data class JsonPost(val title: String? = "",
                     val preview: JsonPreview? = JsonPreview(),
                     @SerializedName("author") val authorName: String? = "",
                     @SerializedName("created_utc") val createdUtc: Long? = 0L,
-                    val id: String? = "")
+                    val id: String? = "", val link: String? = "")

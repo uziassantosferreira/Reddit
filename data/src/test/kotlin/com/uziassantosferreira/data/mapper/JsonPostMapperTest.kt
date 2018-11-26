@@ -24,12 +24,12 @@ class JsonPostMapperTest {
     }
 
     private val post = Post(title = FAKE_TITLE, date = FAKE_DATE, author = Author(FAKE_AUTHOR_NAME), imagePreview = listOf(
-        FAKE_IMAGE, FAKE_IMAGE), remoteId = FAKE_ID)
+        FAKE_IMAGE, FAKE_IMAGE), remoteId = FAKE_ID, link = FAKE_URL)
 
     private val jsonPost = JsonPost(title = FAKE_TITLE,
         createdUtc = FAKE_DATE.time / 1000, authorName = FAKE_AUTHOR_NAME,
         preview = JsonPreview(listOf(JsonContentImage(image = FAKE_JSON_IMAGE, resolutions = listOf(FAKE_JSON_IMAGE)))),
-        id = FAKE_ID)
+        id = FAKE_ID, link = FAKE_URL)
 
     @Test
     fun `should be correctly transform and expected domain`() {

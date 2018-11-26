@@ -22,11 +22,11 @@ class PresentationPostMapperTest {
     }
 
     private val domain = Post(title = FAKE_TITLE, date = FAKE_DATE, author = Author(FAKE_AUTHOR_NAME),
-        imagePreview = listOf(FAKE_IMAGE, FAKE_IMAGE), remoteId = FAKE_ID)
+        imagePreview = listOf(FAKE_IMAGE, FAKE_IMAGE), remoteId = FAKE_ID, link = FAKE_URL)
 
     private val presentation = Presentation(title = FAKE_TITLE, date = FAKE_DATE,
         author = com.uziassantosferreira.presentation.model.Author(FAKE_AUTHOR_NAME),
-        imagePreview = listOf(FAKE_PRESENTATION_IMAGE, FAKE_PRESENTATION_IMAGE), remoteId = FAKE_ID)
+        imagePreview = listOf(FAKE_PRESENTATION_IMAGE, FAKE_PRESENTATION_IMAGE), remoteId = FAKE_ID, link = FAKE_URL)
 
     @Test
     fun `should be correctly transform and expected domain`() {

@@ -31,6 +31,7 @@ import com.uziassantosferreira.reddit.util.customtab.CustomTabsOnClickListener
 import android.text.SpannableString
 import android.text.Spannable
 import android.text.Spanned
+import androidx.core.app.ShareCompat
 import androidx.core.view.ViewCompat
 import com.uziassantosferreira.reddit.util.CustomClickURLSpan
 import com.uziassantosferreira.reddit.util.customtab.CustomTabActivityHelper
@@ -42,12 +43,13 @@ class DetailFragment: BaseFragment() {
     companion object {
         const val PROPERTY_PAGED_LIST = "pagedListDetail"
         private val URL_PATTERN = Pattern.compile("((http|https|rstp):\\/\\/\\S*)")
-
     }
 
     private val commentsViewModel: CommentsViewModel by viewModel()
 
     private val commentsAdapter: CommentsAdapter by inject { parametersOf({commentsViewModel.retry()}) }
+
+    private val post  by lazy {  DetailFragmentArgs.fromBundle(arguments).post }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -58,18 +60,26 @@ class DetailFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val post = DetailFragmentArgs.fromBundle(arguments).post
 
         initAdapter()
-        subscribeLiveData(post)
-        setUpCollapsingToolbar(post)
-        fillFields(post)
+        subscribeLiveData()
+        setUpCollapsingToolbar()
+        fillFields()
         setUpToolbar()
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
         buttonRetry.setOnClickListener { commentsViewModel.retry() }
+        buttonShare.setOnClickListener { share() }
+    }
+
+    private fun share() {
+        ShareCompat.IntentBuilder.from(activity)
+            .setType("text/plain")
+            .setChooserTitle(R.string.app_name)
+            .setText(post.link)
+            .startChooser()
     }
 
     private fun setUpToolbar() {
@@ -79,7 +89,7 @@ class DetailFragment: BaseFragment() {
         }
     }
 
-    private fun fillFields(post: Post) {
+    private fun fillFields() {
         textViewText.visibility = if (post.text.isEmpty()) View.GONE else View.VISIBLE
         addSupportToOpenChromeTab(post.text)
 
@@ -111,7 +121,7 @@ class DetailFragment: BaseFragment() {
             spannable.setSpan(urlSpan, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
     }
-    private fun setUpCollapsingToolbar(post: Post) {
+    private fun setUpCollapsingToolbar() {
         collapsingToolbarLayout.title = post.title
         collapsingToolbarLayout.subtitle = DateFormat.getDateInstance(DateFormat.FULL).format(post.date)
     }
@@ -121,7 +131,7 @@ class DetailFragment: BaseFragment() {
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
 
-    private fun subscribeLiveData(post: Post) {
+    private fun subscribeLiveData() {
         commentsViewModel.getComments(post).observe(this,
             Observer<PagedList<Comment>> { commentsAdapter.submitList(it) })
         commentsViewModel.getNetworkState().observe(this,
