@@ -69,13 +69,18 @@ Architectural approach
 
 * [Android Support Library](https://developer.android.com/topic/libraries/support-library/index.html)
 Provides additional convenience classes and features not available in the standard Framework API for easier development and support across more devices.
+* [Custom tab Library](https://developer.chrome.com/multidevice/android/customtabs)
+Chrome Custom Tabs give apps more control over their web experience, and make transitions between native and web content more seamless without having to resort to a WebView.
+
 
 ### Architecture and Design
 
 * [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)
 A collection of libraries that help you design robust, testable, and maintainable apps.
 Start with classes for managing your UI component lifecycle and handling data persistence.
-* [Koin]
+
+### Dependency injection
+* [Koin](https://github.com/InsertKoinIO/koin)
 A pragmatic lightweight dependency injection framework for Kotlin developers.
 
 
@@ -96,8 +101,6 @@ Allows you to create large and complex layouts with a flat view hierarchy (no ne
 A flexible view for providing a limited window into a large data set.
 * [Glide](https://github.com/bumptech/glide)
 An image loading and caching library for Android focused on smooth scrolling
-* [CircleImageView](https://github.com/hdodenhof/CircleImageView)
-A circular ImageView for Android
 
 
 ### Data Request
