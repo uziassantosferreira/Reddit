@@ -10,6 +10,8 @@
         android:paddingLeft="@dimen/card_padding_from_edge_of_screen_to_card"
         android:paddingRight="@dimen/card_padding_from_edge_of_screen_to_card"
         android:paddingTop="@dimen/card_padding_from_edge_of_screen_to_card"
-        android:scrollbarStyle="outsideOverlay"
-        tools:listitem="@layout/list_item_post" xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"/>
+        android:clickable="false"
+        tools:listitem="@layout/list_item_post"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"/>
