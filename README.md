@@ -6,8 +6,8 @@ Supported language: <img src="flags/uk_flag.png" width=20> <img src="flags/brazi
    * [Requirements](#requirements)
    * [Showcase](#showcase)
 2. [Architecture](#architecture)
-   * [Clean Architecture](#clean-architecture)
-   * [Frameworks](#frameworks)
+   * [Clean Architecture](#Architecture)
+   * [Libraries and tools used in the project](#Android)
 3. [TODO](#todo)  
 4. [License](#license)
 
@@ -44,24 +44,26 @@ Reddit Application
 
 # Architecture
 
-Architecture
 Uses concepts of the notorious Uncle Bob's architecture called Clean Architecture.
 The software produced by this architecture is going to be:
+
+<img src="architecture/clean.png"/>
 
 Independent of Frameworks.
 Testable.
 Independent of UI.
 Independent of Database.
 
-<a name="clean-architecture" />
------------------
-<img src="architecture/clean.png" align="center">
+<img src="architecture/architecture_1.png" width="600"/>
 
-Architectural approach
------------------
-<img src="architecture/clean_1.jpg" align="center">
-
-<a name="frameworks" />
+* __UI__ - contains all UI related classes (Activities, Fragments, Adapters, etc.). <br/>
+This layer is using Jetpack's [Navigation API](https://developer.android.com/topic/libraries/architecture/navigation.html) to implement the "single activity" approach for the navigation flow.
+* __BuildSrc__ - contains all gradle dependencies [Better Management](https://handstandsam.com/2018/02/11/kotlin-buildsrc-for-better-gradle-dependency-management/)
+* __Presentation__ - once this project is folowing (or trying to) the [MVVM pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel), this layer is using [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) library to keep data between config changes.<br/>
+To expose observable data from the View Models, this module is using [LiveData](https://developer.android.com/topic/libraries/architecture/livedata).<br/>
+This layer is using [Lifecycle library](https://developer.android.com/topic/libraries/architecture/lifecycle) in order to tie the View Model with UI lifecycle (in some cases).<br/>
+* __Domain__ - in this module are declared the application's use cases.
+* __Data__ - declares the basic operations that must be provided by the application's repository and the basic data classes used as [DTO](https://en.wikipedia.org/wiki/Data_transfer_object) with implementation to get a remote data in the [API Reddit](https://www.reddit.com/dev/api/).
 
 ## Libraries and tools used in the project
 
