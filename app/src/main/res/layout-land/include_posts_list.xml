@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
+<com.uziassantosferreira.reddit.util.GridRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -8,6 +8,7 @@
         app:spanCount="@integer/grid_column_land_count"
         android:paddingBottom="@dimen/card_padding_from_edge_of_screen_to_card"
         android:paddingLeft="@dimen/card_padding_from_edge_of_screen_to_card"
+        android:layoutAnimation="@anim/grid_layout_animation_from_bottom"
         android:paddingRight="@dimen/card_padding_from_edge_of_screen_to_card"
         android:paddingTop="@dimen/card_padding_from_edge_of_screen_to_card"
         android:scrollbarStyle="outsideOverlay"
