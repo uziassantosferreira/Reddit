@@ -56,6 +56,9 @@ class PostsFragment: BaseFragment() {
     }
 
     private fun initAdapter() {
+        if (postsAdapter.itemCount >= 1){
+            recyclerView.layoutAnimation = null
+        }
         recyclerView.adapter = postsAdapter
     }
 
