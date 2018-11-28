@@ -33,6 +33,14 @@ data class Post(val title: String = "", val author: Author = Author(),
         return 0
     }
 
+    //TODO Refactor to get image by screen
+    fun getImageUrl(): String {
+        if (imagePreview.isEmpty() || imagePreview.last().url.isEmpty()){
+            return ""
+        }
+        return imagePreview.last().url
+    }
+
     companion object CREATOR : Parcelable.Creator<Post> {
         override fun createFromParcel(parcel: Parcel): Post {
             return Post(parcel)

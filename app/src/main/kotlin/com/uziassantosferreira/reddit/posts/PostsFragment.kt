@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.PagedList
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
 import com.uziassantosferreira.presentation.data.datasource.Status
@@ -30,7 +33,7 @@ class PostsFragment: BaseFragment() {
     private val postsViewModel: PostsViewModel by viewModel()
 
     private val postsAdapter: PostsAdapter by inject{ parametersOf({postsViewModel.retry()},
-        {post: Post-> clickItem(post) }) }
+        {post: Post, image: ImageView -> clickItem(post, image) }) }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -56,9 +59,16 @@ class PostsFragment: BaseFragment() {
         recyclerView.adapter = postsAdapter
     }
 
-    private fun clickItem(post: Post) {
+    private fun clickItem(post: Post, image: ImageView) {
         val action = PostsFragmentDirections.ActionPostsFragmentToDetailFragment(post)
-        navController.navigate(action)
+
+        if (post.getImageUrl().isEmpty()){
+            navController.navigate(action)
+            return
+        }
+
+        val extras = FragmentNavigatorExtras(image to post.remoteId)
+        navController.navigate(action, extras)
     }
 
     private fun initSwipeToRefresh() {

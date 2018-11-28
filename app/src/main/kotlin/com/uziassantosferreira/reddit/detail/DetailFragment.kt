@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.uziassantosferreira.presentation.data.datasource.NetworkState
 import com.uziassantosferreira.presentation.model.Comment
 import com.uziassantosferreira.presentation.viewmodel.CommentsViewModel
 import com.uziassantosferreira.reddit.R
 import com.uziassantosferreira.reddit.base.BaseFragment
-import com.uziassantosferreira.reddit.util.GlideApp
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.list_item_network_state.*
 import org.koin.android.ext.android.inject
@@ -28,7 +25,12 @@ import android.text.SpannableString
 import android.text.Spannable
 import android.text.Spanned
 import android.util.Patterns
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.app.ShareCompat
+import androidx.core.view.ViewCompat
+import androidx.transition.TransitionInflater
+import androidx.transition.TransitionSet
+import com.uziassantosferreira.reddit.extension.load
 import com.uziassantosferreira.reddit.util.CustomClickURLSpan
 import com.uziassantosferreira.reddit.util.customtab.CustomTabActivityHelper
 
@@ -36,6 +38,8 @@ class DetailFragment: BaseFragment() {
 
     companion object {
         const val PROPERTY_PAGED_LIST = "pagedListDetail"
+        private const val DURATION_TRANSITION = 380L
+        private const val DELAY_TRANSITION = 200L
     }
 
     private val commentsViewModel: CommentsViewModel by viewModel()
@@ -48,7 +52,33 @@ class DetailFragment: BaseFragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setProperty(PROPERTY_PAGED_LIST, getPagedListConfig())
+        if (post.getImageUrl().isNotEmpty()){
+            postponeEnterTransition()
+            setTransitions()
+        }
+
         return inflater.inflate(R.layout.fragment_detail, container, false)
+    }
+
+    private fun setTransitions() {
+        val inSet = TransitionSet()
+        val inflater = TransitionInflater.from(requireContext())
+        val transition = inflater.inflateTransition(R.transition.arc)
+        inSet.apply {
+            addTransition(transition)
+            duration = DURATION_TRANSITION
+            interpolator = AccelerateDecelerateInterpolator()
+        }
+        val outSet = TransitionSet()
+            .apply {
+                addTransition(transition)
+                duration = DURATION_TRANSITION
+                interpolator = AccelerateDecelerateInterpolator()
+                startDelay = DELAY_TRANSITION
+            }
+
+        sharedElementEnterTransition = inSet
+        sharedElementReturnTransition = outSet
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,21 +111,26 @@ class DetailFragment: BaseFragment() {
             navController.navigateUp()
         }
     }
-
     private fun fillFields() {
         textViewText.visibility = if (post.text.isEmpty()) View.GONE else View.VISIBLE
         addSupportToOpenChromeTab(post.text)
 
+        imageView.transitionName = post.remoteId
+
         if (post.imagePreview.isNotEmpty() && post.imagePreview.last().url.isNotEmpty()){
             val image = post.imagePreview.last()
-            GlideApp.with(this)
-                .load(image.url)
-                .dontAnimate()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imageViewThumb)
+            imageView.load(image.url, true) {
+                startPostponedEnterTransition()
+            }
         }else {
-            Glide.with(this).clear(imageViewThumb)
+            lockAppBarOpen()
         }
+    }
+
+    private fun lockAppBarOpen() {
+        appBarLayout.setExpanded(false, false)
+        appBarLayout.isActivated = false
+        ViewCompat.setNestedScrollingEnabled(nestedScrollView, false)
     }
 
     private fun addSupportToOpenChromeTab(text: String) {

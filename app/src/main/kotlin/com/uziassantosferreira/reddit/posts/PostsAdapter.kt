@@ -1,6 +1,7 @@
 package com.uziassantosferreira.reddit.posts
 
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,7 @@ import com.uziassantosferreira.presentation.model.Post
 import com.uziassantosferreira.reddit.R
 
 class PostsAdapter(private val retryCallback: () -> Unit,
-                   private val clickItem: (post: Post) -> Unit) : PagedListAdapter<Post,
+                   private val clickItem: (post: Post, image: ImageView) -> Unit) : PagedListAdapter<Post,
         RecyclerView.ViewHolder>(PostDiffCallback) {
 
     private var networkState: NetworkState? = null

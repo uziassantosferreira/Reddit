@@ -1,5 +1,6 @@
 package com.uziassantosferreira.reddit.di
 
+import android.widget.ImageView
 import com.uziassantosferreira.domain.model.Pagination
 import com.uziassantosferreira.domain.model.Post
 import com.uziassantosferreira.domain.requestvalue.GetPostByCommunityRequestValue
@@ -23,7 +24,7 @@ val postsModule = module {
     single<PostsRepository> { PostsRepositoryImpl(get(), getProperty(PostsFragment.PROPERTY_PAGED_LIST)) }
 
     factory { (retryCallback: () -> Unit,
-                      clickItem: (post: com.uziassantosferreira.presentation.model.Post) -> Unit) ->
+                      clickItem: (post: com.uziassantosferreira.presentation.model.Post, image: ImageView) -> Unit) ->
         PostsAdapter(retryCallback, clickItem) }
 
     viewModel { PostsViewModel(get()) }

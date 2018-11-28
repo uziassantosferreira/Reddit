@@ -23,8 +23,6 @@
     <dimen name="app_bar_height">320dp</dimen>
     <dimen name="app_bar_height_image_view">180dp</dimen>
 
-
-
     <!-- Floating action button -->
     <dimen name="floating_action_button_margin">16dp</dimen>
     <dimen name="floating_action_button_elevation">4dp</dimen>
