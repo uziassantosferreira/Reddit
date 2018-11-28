@@ -2,6 +2,7 @@ package com.uziassantosferreira.data.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.uziassantosferreira.data.BuildConfig
 import com.uziassantosferreira.data.api.RedditService
 import com.uziassantosferreira.data.di.Network.API_URL
 import com.uziassantosferreira.data.di.Network.API_URL_NAME
@@ -37,7 +38,8 @@ val networkModule = module {
 
     single<Interceptor> {
         val logger = HttpLoggingInterceptor()
-        logger.level = HttpLoggingInterceptor.Level.BODY
+        logger.level = if (BuildConfig.DEBUG)
+            HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
          logger
     }
 
