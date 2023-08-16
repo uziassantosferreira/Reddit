@@ -15,7 +15,7 @@ object Versions {
     const val constraintLayout = "1.1.2"
     const val recyclerview = "1.0.0"
     const val cardview = "1.0.0"
-    const val koin = "1.0.1"
+    const val koin = "1.0.2"
     const val lifecycle = "2.0.0"
     const val kakao = "1.4.0"
     const val espresso = "3.1.0"
