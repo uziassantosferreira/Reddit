@@ -12,7 +12,7 @@ object Versions {
     const val mockito = "2.0.0"
     const val navigationVersion = "1.0.0-alpha07"
     const val paging = "2.1.0-beta01"
-    const val constraintLayout = "1.1.2"
+    const val constraintLayout = "1.1.3"
     const val recyclerview = "1.0.0"
     const val cardview = "1.0.0"
     const val koin = "1.0.1"
