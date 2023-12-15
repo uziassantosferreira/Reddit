@@ -6,7 +6,7 @@ object Versions {
     const val versionCode = 1
     const val rxKotlin = "2.3.0"
     const val rxAndroid = "2.1.0"
-    const val material = "1.0.0"
+    const val material = "1.11.0"
     const val appcompat = "1.0.2"
     const val kluent = "1.42"
     const val mockito = "2.0.0"
