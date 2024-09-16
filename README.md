@@ -1,4 +1,4 @@
-Supported language: <img src="flags/uk_flag.png" width=20> <img src="flags/brazilian_flag.png" width=20>
+Supported languagde: <img src="flags/uk_flag.png" width=20> <img src="flags/brazilian_flag.png" width=20>
 
 # Summary
 1. [Introduction](#introduction)
